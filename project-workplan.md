@@ -56,7 +56,7 @@ We haven’t included the recurring project management tasks—e.g., facilitatin
 | **Prototype release** | Everyone tests and reviews | 2 April  |
 | Schedule beta testing with potential users | Iuri | 9 April |
 | Weekly blog post, Twitter outreach, first draft of “About” page | Michael | 9 April |
-| **CUNY Spring Recess**  | 16 April  |
+| **CUNY Spring Recess**  | Everyone continues work as needed | 16 April  |
 | Host beta testing sessions (either locally or remotely) | Iuri | 23 April |
 | Weekly blog post, Twitter outreach, first draft of “About” page | Michael | 23 April |
 | Work with development team to make improvements per beta testing findings | Iuri | 30 April |
@@ -77,7 +77,7 @@ We haven’t included the recurring project management tasks—e.g., facilitatin
 | **Prototype release** | Everyone tests and reviews | 2 April  |
 | Debug and improve prototype based on group testing and review | Brian | 9 April |
 | Debug and improve prototype based on group testing and review | Greg | 9 April |
-| **CUNY Spring Recess**  | 16 April  |
+| **CUNY Spring Recess**  | Everyone continues work as needed | 16 April  |
 | Continue back-end work | Brian | 23 April |
 | Continue front-end work | Greg | 23 April |
 | Debug and improve prototype based on beta testing | Brian | 30 April |
