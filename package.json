@@ -1,0 +1,28 @@
+{
+  "name": "end-line",
+  "version": "0.0.0",
+  "engines": {
+    "node": "6.9.5"
+  },
+  "description": "TEI encoding for poetry",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tlewek/end-line"
+  },
+  "author": "Brian Hamilton, Michael Kirby, Tom Lewek, Iuri Moscardi, Gregory Rocco",
+  "bugs": {
+    "url": "https://github.com/tlewek/end-line/issues"
+  },
+  "license": "MIT",
+  "homepage": "https://endlineproject.herokuapp.com/",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "compression": "^1.6.2",
+    "express": "^4.14.1",
+    "path": "^0.12.7"
+  }
+}
