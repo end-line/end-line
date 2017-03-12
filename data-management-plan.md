@@ -21,12 +21,12 @@ Poems
 Posts
 - `id `
 - `text`
-- `datetime`
-- `poem_id`
 
 Posted
 - `post_id`
 - `u_id`
+- `poem_id`
+- `date_posted`
 
 Users
 - `id`
