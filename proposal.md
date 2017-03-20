@@ -34,7 +34,7 @@ Of course, individuals could encode any literary text or document with such a pr
 
 Most importantly, this project will deliver a prototype of a platform where users can upload poetry, encode it, and invite others to do the same. They will accomplish this through a form that first accepts a plain text version of the poetry to be encoded. This form will require basic metadata (e.g. author, title, name of submitter) and create a parent object. With the parent object created, users will then submit their encodings of the poetry through a subsequent form that allows them to add TEI tags, validates their XML, and requires basic metadata (e.g. name of submitter). Each encoding will become a child object of the parent object. Users will also be able to compare the differences between any two child objects through a front-end display. See **Fig. 1** for an example of how this might look.
 
-![diff example](images/diff-example.jpg)
+![diff example](public/images/diff-example.jpg)
 
 **Fig 1.** Comparison of two different encodings, which use tags from the [TEI “Verse” module](http://www.tei-c.org/release/doc/tei-p5-doc/en/html/VE.html), of a selection from Susan Howe’s *That This*.
 
