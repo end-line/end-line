@@ -86,17 +86,17 @@
                                     <h3 class="modal-title">Sign-In</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <form role="form">
+                                    <form role="form" action="/login" method="POST">
                                         <div class="form-group">
-                                            <input type="username" class="form-control" placeholder="username">
+                                            <input type="username" class="form-control" placeholder="username" name="username">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="password">
+                                            <input type="password" class="form-control" placeholder="password" name="password">
                                         </div>
+                                        <button class="btn btn-primary btn-block" type="submit">Sign In</button>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-primary btn-block">Sign In</button>
                                 </div>
                             </div>
                         </div>
@@ -112,20 +112,21 @@
                                     <h3 class="modal-title">Sign-Up</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <form role="form">
+                                    <form role="form" action="/signup" method="POST">
                                         <div class="form-group">
-                                            <input type="Email" class="form-control" placeholder="Email">
+                                            <input type="Email" class="form-control" placeholder="Email" name="email">
                                         </div>
                                         <div class="form-group">
-                                            <input type="username" class="form-control" placeholder="username">
+                                            <input type="username" class="form-control" placeholder="username" name="username">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="password">
+                                            <input type="password" class="form-control" placeholder="password" name="password">
                                         </div>
+                                        <button class="btn btn-primary btn-block" type="submit">Sign-Up</button>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-primary btn-block">Sign-Up</button>
+                                    
                                     <p class="center-text">By signing up, you agree to our <a href="tos" target="_blank">Terms of Service</a> and <a href="privacypolicy" target="_blank">Privacy Policy</a>
                                 </div>
                             </div>
