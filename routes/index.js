@@ -28,6 +28,10 @@ router.get('/tos', function(req, res, next) {
   res.render('pages/tos');
 });
 
+router.get('/profile', function(req, res, next) {
+  res.render('pages/profile');
+});
+
 router.get('/logout', function(req, res, next) {  
   req.logout();
   res.redirect('/');
