@@ -44,7 +44,7 @@ require('./server/passport')(passport);
 
 app.use('/', routes);
 
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 let str = '<yes p:id="yeah">ff<yes>fgfM</yes>gf</yes> /n <sysy>d<dd><FF text="p98">jd</FF><hhh></sysy></dd></hhh>jdjd'.replace(/\/n/g, "");
 console.log(validateXML(str));
