@@ -12,6 +12,7 @@ let express = require('express'),
     routes = require('./routes/index'),
     flash = require('connect-flash'),
     logger = require('morgan'),
+    validateXML = require('./server/validate'),
     app = express();
 
 app.set('port', process.env.PORT || 8080); //sets port
@@ -39,11 +40,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+require('./server/passport')(passport);
+
 app.use('/', routes);
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-require('./server/passport')(passport);
+let str = '<yes p:id="yeah">ff<yes>fgfM</yes>gf</yes> /n <sysy>d<dd><FF text="p98">jd</FF><hhh></sysy></dd></hhh>jdjd'.replace(/\/n/g, "");
+console.log(validateXML(str));
 
 //Handle 404
 app.use(function(req, res, next) {

@@ -8,7 +8,7 @@ let createSalt = () => crypto.randomBytes(32).toString('hex'); //creates salt fo
 
 let createHash = (string) => crypto.createHash('sha256').update(string).digest('hex'); //hashes password
 
-module.exports = function(passport) {
+module.exports = function (passport) {
 
   passport.serializeUser((user, done) => {
     done(null, user.id);
@@ -40,13 +40,24 @@ module.exports = function(passport) {
             let salt = createSalt();
             let hashedPassword = createHash(password + salt);
             db.query("INSERT INTO users (username, password, salt) VALUES ($1, $2, $3)", [username, hashedPassword, salt])
-              .then(() => {
-                return done(null, newUser);
-              })
-              .catch(next);
+              .then(result => {
+                return db.query("SELECT id, username FROM users WHERE username = $1 AND password = $2", [username, hashedPassword])
+                  .then(result => {
+                    return done(null, result[0]);
+                  })
+                  .catch(err => {
+                    console.log(err)
+                    return done(null, false, req.flash('loginMessage', 'Wrong password.'));
+                  });
+                })
+                .catch(err => {
+                  return done(null, false, req.flash('loginMessage', 'Database error.'));
+                });
           }
         })
-        .catch(next);
+        .catch(err => {
+          return done(null, false, req.flash('loginMessage', 'Database error.'));
+        });
     });
   }));
 
