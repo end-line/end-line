@@ -1,8 +1,8 @@
 "use strict";
 
-const tagPattern = /^[<]([a-zA-Z]{1,20}|[a-zA-Z]{1,20}\s([a-zA-Z]{1,20}|[a-zA-Z]{1,10}[:]?[a-zA-Z]{1,10})[=]["][a-zA-Z0-9]{1,20}["])[>]$/
+const tagPattern = /^[<]([a-zA-Z]{1,20}|[a-zA-Z]{1,20}\s([a-zA-Z]{1,20}|[a-zA-Z]{1,10}[:]?[a-zA-Z]{1,10})[=]["].{1,2000}["])[>]$/;
 
-module.exports = function (str) {
+exports.validate = function (str, callback) {
 
   for (let i=0;i<str.length;i++) {
     if (str[i] === "<") {
@@ -16,7 +16,7 @@ module.exports = function (str) {
         }
         startTag += str[j];
       }
-      if (!tagPattern.test(startTag)) { return {status: false, message: "Failed to match TEI pattern for " + startTag}; }
+      if (!tagPattern.test(startTag)) { return callback(false, "Failed to match TEI pattern for " + startTag); }
       let longForm = startTag.indexOf(" ");
       let endTag = longForm > -1 ? "</" + startTag.substring(1, longForm) + ">" : startTag.replace("<","</");
       if (str.substring(nextIndex).indexOf(endTag) > -1) {
@@ -24,11 +24,11 @@ module.exports = function (str) {
         i--;
       }
       else {
-        return {status: false, message: "Failed to find end tag for " + startTag};
+        return callback(false, "Failed to find end tag for " + startTag);
       }
     }
   }
 
-  return {status: true, message: "Valid TEI XML"};
+  return callback(true, "Valid TEI XML");
 
 }

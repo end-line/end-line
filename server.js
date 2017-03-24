@@ -12,7 +12,6 @@ let express = require('express'),
     routes = require('./routes/index'),
     flash = require('connect-flash'),
     logger = require('morgan'),
-    validateXML = require('./server/validate'),
     app = express();
 
 app.set('port', process.env.PORT || 8080); //sets port
@@ -46,9 +45,6 @@ app.use('/', routes);
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
-let str = '<yes p:id="yeah">ff<yes>fgfM</yes>gf</yes> /n <sysy>d<dd><FF text="p98">jd</FF><hhh></sysy></dd></hhh>jdjd'.replace(/\/n/g, "");
-console.log(validateXML(str));
-
 //Handle 404
 app.use(function(req, res, next) {
   res.status(404).send('404: Not Found. You don\'t belong here.');
@@ -56,6 +52,7 @@ app.use(function(req, res, next) {
 
 //Handle 500
 app.use(function(err, req, res, next) {
+  console.log(err)
   res.status(500).send('500: Internal Server Error');
 });
 

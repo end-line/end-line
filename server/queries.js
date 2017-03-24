@@ -2,18 +2,16 @@
 
 let db = require('./pghelper');
 
-let test = (req, res, next) => {
-  let sql = "SELECT username FROM users";
+let profileInfo = (req, res, next) => {
+  let username = req.params.username,
+      sql = "SELECT u.id, p.first_name, p.last_name, p.email FROM profile p, users u WHERE u.id = p.id AND u.username = $1";
 
-  db.query(sql, [])
-    .then(users => {
-      return res.render('testpage', {
-        title: 'Test Page',
-        users: users,
-        test : [{name:"yes",type:"yay",xml:req.body.xml}]
-      });
+  db.query(sql, [username], true)
+    .then(profileInfo => {
+      res.locals.profileInfo = profileInfo;
+      return next();
     })
     .catch(next);
 };
 
-exports.test = test;
+exports.profileInfo = profileInfo;
