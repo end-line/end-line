@@ -9,40 +9,59 @@ let express = require('express'),
 router.get('/', function (req, res, next) {
   // console.log(req.flash('loginMessage'));
   // console.log(req.flash('signupMessage'));
-  return res.render('pages/index', { message: req.flash('loginMessage') || req.flash('signupMessage') });
+  return res.render('pages/index', {
+    message: req.flash('loginMessage') || req.flash('signupMessage'), 
+    username: req.user ? req.user.username : ""
+  });
 });
 
 router.get('/about', function (req, res, next) {
-  return res.render('pages/about');
+  return res.render('pages/about', {
+    username: req.user ? req.user.username : ""
+  });
 });
 
 router.get('/news', function (req, res, next) {
-  return res.render('pages/news');
+  return res.render('pages/news', {
+    username: req.user ? req.user.username : ""
+  });
 });
 
 router.get('/contact', function (req, res, next) {
-  return res.render('pages/contact');
+  return res.render('pages/contact', {
+    username: req.user ? req.user.username : ""
+  });
 });
 
 router.get('/privacypolicy', function (req, res, next) {
-  return res.render('pages/privacypolicy');
+  return res.render('pages/privacypolicy', {
+    username: req.user ? req.user.username : ""
+  });
 });
 
 router.get('/tos', function (req, res, next) {
-  return res.render('pages/tos');
+  return res.render('pages/tos', {
+    username: req.user ? req.user.username : ""
+  });
 });
 
 router.get('/upload', function(req, res, next) {
-  return res.render('pages/upload');
+  return res.render('pages/upload', {
+    username: req.user ? req.user.username : ""
+  });
 });
 
 router.get('/encodesubmission', function(req, res, next) {
-  return res.render('pages/encodesubmission');
+  return res.render('pages/encodesubmission', {
+    username: req.user ? req.user.username : ""
+  });
 });
 
 router.get('/profile/:username', isLoggedIn, queries.profileInfo, function (req, res, next) {
   console.log(res.locals.profileInfo)
-  return res.render('pages/profile');
+  return res.render('pages/profile', {
+    username: req.user ? req.user.username : ""
+  });
 });
 
 router.get('/logout', function (req, res, next) {  
