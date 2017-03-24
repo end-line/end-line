@@ -32,6 +32,14 @@ router.get('/profile', function(req, res, next) {
   res.render('pages/profile');
 });
 
+router.get('/upload', function(req, res, next) {
+  res.render('pages/upload');
+});
+
+router.get('/encodesubmission', function(req, res, next) {
+  res.render('pages/encodesubmission');
+});
+
 router.get('/logout', function(req, res, next) {  
   req.logout();
   res.redirect('/');

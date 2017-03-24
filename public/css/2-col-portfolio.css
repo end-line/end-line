@@ -43,8 +43,38 @@ h5.about {
     color: #323c55;
     font-size: 13px;
     font-weight: bold;
+}
+
+/* Top Buffer for Upload Text Input Forms, buttons */
+
+.but-top-buffer { 
+  margin-top:20%; 
+}
+
+.top-buffer { 
+  margin-top:20px; 
+}
+
+.button-buffer{
+  position: relative;
+  height: 14rem;
+}
+
+.top-button-buffer
+{
+position: absolute;
+top: 33%;
+transform: translateY(-33%);
+}
+
+.bottom-button-buffer
+{
+position: absolute;
+top: 75%;
+}
 
 /* NAVBAR CSS */
+
 .navbar-inverse {
   background-color: #323c55;
   border-color: #323c55;
