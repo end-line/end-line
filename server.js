@@ -3,6 +3,7 @@
 let express = require('express'),
     compression = require('compression'),
     path = require('path'),
+    serveStatic = require('serve-static'),
     bodyParser = require('body-parser'),
     queries = require('./server/queries'),
     dotenv = require('dotenv-safe'),
@@ -20,6 +21,8 @@ dotenv.load({
   allowEmptyValues: true
 });
 
+app.use(serveStatic(path.join(__dirname, 'public')));
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -32,8 +35,8 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(session({
     secret: 'teisecret',
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -42,8 +45,6 @@ app.use(flash());
 require('./server/passport')(passport);
 
 app.use('/', routes);
-
-app.use('/', express.static(path.join(__dirname, 'public')));
 
 //Handle 404
 app.use(function(req, res, next) {

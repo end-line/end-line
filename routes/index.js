@@ -11,56 +11,58 @@ router.get('/', function (req, res, next) {
   // console.log(req.flash('signupMessage'));
   return res.render('pages/index', {
     message: req.flash('loginMessage') || req.flash('signupMessage'), 
-    username: req.user ? req.user.username : ""
+    username: req.user ? req.user.username : null
   });
 });
 
 router.get('/about', function (req, res, next) {
   return res.render('pages/about', {
-    username: req.user ? req.user.username : ""
+    username: req.user ? req.user.username : null
   });
 });
 
 router.get('/news', function (req, res, next) {
   return res.render('pages/news', {
-    username: req.user ? req.user.username : ""
+    username: req.user ? req.user.username : null
   });
 });
 
 router.get('/contact', function (req, res, next) {
   return res.render('pages/contact', {
-    username: req.user ? req.user.username : ""
+    username: req.user ? req.user.username : null
   });
 });
 
 router.get('/privacypolicy', function (req, res, next) {
   return res.render('pages/privacypolicy', {
-    username: req.user ? req.user.username : ""
+    username: req.user ? req.user.username : null
   });
 });
 
 router.get('/tos', function (req, res, next) {
   return res.render('pages/tos', {
-    username: req.user ? req.user.username : ""
+    username: req.user ? req.user.username : null
   });
 });
 
 router.get('/upload', function(req, res, next) {
   return res.render('pages/upload', {
-    username: req.user ? req.user.username : ""
+    username: req.user ? req.user.username : null
   });
 });
 
 router.get('/encodesubmission', function(req, res, next) {
   return res.render('pages/encodesubmission', {
-    username: req.user ? req.user.username : ""
+    username: req.user ? req.user.username : null
   });
 });
 
 router.get('/profile/:username', isLoggedIn, queries.profileInfo, function (req, res, next) {
   console.log(res.locals.profileInfo)
+  let profileInfo = res.locals.profileInfo;
   return res.render('pages/profile', {
-    username: req.user ? req.user.username : ""
+    username: req.user ? req.user.username : null,
+    profileInfo: res.locals.profileInfo
   });
 });
 

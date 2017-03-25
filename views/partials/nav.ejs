@@ -18,6 +18,7 @@
                     <li><a href="/contact">Contact</a></li>
                     <li><a href="/news">News</a></li>
                 </ul>
+                <% if (username) { %>
                     <!--right align -->
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -25,10 +26,11 @@
                         <ul class="dropdown-menu">
                             <li><a href="/profile/<%= username %>">My Profile</a></li>
                             <li><a href="/#">Settings</a></li>
-                            <li><a href="/#">Logout</a></li>
+                            <li><a href="/logout">Logout</a></li>
                         </ul>
                         </li> 
                     </ul>
+                <% } %>
             </div>
             <!-- /.navbar-collapse -->
         </div>
