@@ -45,6 +45,18 @@ h5.about {
     font-weight: bold;
 }
 
+/* Font Overrides */
+p {
+  font-family: 'Merriweather Sans', sans-serif;
+}
+
+li {
+  font-family: 'Merriweather Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Space Mono', monospace;
+}
 /* Top Buffer for Upload Text Input Forms, buttons */
 
 .but-top-buffer { 
