@@ -57,6 +57,30 @@ router.get('/encodesubmission', function(req, res, next) {
   });
 });
 
+router.get('/compare', function(req, res, next) {
+  return res.render('pages/compare', {
+    username: req.user ? req.user.username : null
+  });
+});
+
+router.get('/search', function(req, res, next) {
+  return res.render('pages/search', {
+    username: req.user ? req.user.username : null
+  });
+});
+
+router.get('/settings', function(req, res, next) {
+  return res.render('pages/settings', {
+    username: req.user ? req.user.username : null
+  });
+});
+
+router.get('/encode', function(req, res, next) {
+  return res.render('pages/encode', {
+    username: req.user ? req.user.username : null
+  });
+});
+
 router.get('/profile/:username', isLoggedIn, queries.profileInfo, function (req, res, next) {
   console.log(res.locals.profileInfo)
   let profileInfo = res.locals.profileInfo;
