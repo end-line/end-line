@@ -45,37 +45,37 @@ router.get('/tos', function (req, res, next) {
   });
 });
 
-router.get('/upload', function(req, res, next) {
+router.get('/upload', isLoggedIn, function (req, res, next) {
   return res.render('pages/upload', {
     username: req.user ? req.user.username : null
   });
 });
 
-router.get('/encodesubmission', function(req, res, next) {
+router.get('/encodesubmission', isLoggedIn, function (req, res, next) {
   return res.render('pages/encodesubmission', {
     username: req.user ? req.user.username : null
   });
 });
 
-router.get('/compare', function(req, res, next) {
+router.get('/compare', isLoggedIn, function(req, res, next) {
   return res.render('pages/compare', {
     username: req.user ? req.user.username : null
   });
 });
 
-router.get('/search', function(req, res, next) {
+router.get('/search', isLoggedIn, function(req, res, next) {
   return res.render('pages/search', {
     username: req.user ? req.user.username : null
   });
 });
 
-router.get('/settings', function(req, res, next) {
+router.get('/settings', isLoggedIn, function(req, res, next) {
   return res.render('pages/settings', {
     username: req.user ? req.user.username : null
   });
 });
 
-router.get('/encode', function(req, res, next) {
+router.get('/encode', isLoggedIn, function(req, res, next) {
   return res.render('pages/encode', {
     username: req.user ? req.user.username : null
   });
@@ -96,7 +96,7 @@ router.get('/logout', function (req, res, next) {
 });
 
 router.post('/login', function (req, res, next) {
-  passport.authenticate('local-login', {failureFlash: true}, function(err, user, info) {
+  passport.authenticate('local-login', {failureFlash: true}, function (err, user, info) {
     if (err) { return next(err); }
     if (!user) { return res.redirect('/'); }
     req.logIn(user, function(err) {
@@ -107,7 +107,7 @@ router.post('/login', function (req, res, next) {
 });
 
 router.post('/signup', function (req, res, next) {
-  passport.authenticate('local-signup', {failureFlash: true}, function(err, user, info) {
+  passport.authenticate('local-signup', {failureFlash: true}, function (err, user, info) {
     if (err) { return next(err); }
     if (!user) { return res.redirect('/'); }
     req.logIn(user, function(err) {
