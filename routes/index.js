@@ -21,8 +21,26 @@ router.get('/about', function (req, res, next) {
   });
 });
 
+router.get('/faq', function (req, res, next) {
+  return res.render('pages/faq', {
+    username: req.user ? req.user.username : null
+  });
+});
+
 router.get('/news', function (req, res, next) {
   return res.render('pages/news', {
+    username: req.user ? req.user.username : null
+  });
+});
+
+router.get('/signup', function (req, res, next) {
+  return res.render('pages/signup', {
+    username: req.user ? req.user.username : null
+  });
+});
+
+router.get('/login', function (req, res, next) {
+  return res.render('pages/login', {
     username: req.user ? req.user.username : null
   });
 });
@@ -59,6 +77,12 @@ router.get('/encodesubmission', isLoggedIn, function (req, res, next) {
 
 router.get('/compare', isLoggedIn, function(req, res, next) {
   return res.render('pages/compare', {
+    username: req.user ? req.user.username : null
+  });
+});
+
+router.get('/item', isLoggedIn, function(req, res, next) {
+  return res.render('pages/item', {
     username: req.user ? req.user.username : null
   });
 });
