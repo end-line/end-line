@@ -226,3 +226,35 @@ div.well{
     width: 600px;
     margin: 0 auto 20px auto;
 }
+
+/* For Item Landing */
+
+.insetmeta1
+{
+  color: #323c55;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.insetmeta2
+{
+  color: #323c55;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.Poem-Container {
+  min-width: 200px;
+  max-width: 600px;
+  padding: 40px;
+  }
+
+.tableitem {
+  text-decoration:underline;
+}
+
+input[type="radio"]{
+    vertical-align: top;
+    margin-top: 15px;
+    text-align:center;
+}
