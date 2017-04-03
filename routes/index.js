@@ -7,10 +7,7 @@ let express = require('express'),
     router = express.Router();
 
 router.get('/', function (req, res, next) {
-  // console.log(req.flash('loginMessage'));
-  // console.log(req.flash('signupMessage'));
   return res.render('pages/index', {
-    message: req.flash('loginMessage') || req.flash('signupMessage'), 
     username: req.user ? req.user.username : null
   });
 });
@@ -34,14 +31,22 @@ router.get('/news', function (req, res, next) {
 });
 
 router.get('/signup', function (req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect('/');
+  }
   return res.render('pages/signup', {
-    username: req.user ? req.user.username : null
+    username: req.user ? req.user.username : null,
+    message: req.flash('signupMessage')
   });
 });
 
 router.get('/login', function (req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect('/');
+  }
   return res.render('pages/login', {
-    username: req.user ? req.user.username : null
+    username: req.user ? req.user.username : null,
+    message: req.flash('loginMessage')
   });
 });
 
@@ -75,42 +80,59 @@ router.get('/encodesubmission', isLoggedIn, function (req, res, next) {
   });
 });
 
-router.get('/compare', isLoggedIn, function(req, res, next) {
+router.get('/compare', isLoggedIn, function (req, res, next) {
   return res.render('pages/compare', {
     username: req.user ? req.user.username : null
   });
 });
 
-router.get('/item', isLoggedIn, function(req, res, next) {
-  return res.render('pages/item', {
-    username: req.user ? req.user.username : null
+router.get('/poem/:id', isLoggedIn, queries.getPoem, function (req, res, next) {
+  let poem = res.locals.poem;
+  return res.render('pages/poem', {
+    username: req.user ? req.user.username : null,
+    poem: poem
   });
 });
 
-router.get('/search', isLoggedIn, function(req, res, next) {
+router.get('/poem/:id/encoding/:encoded_id', isLoggedIn, queries.getPoem, function (req, res, next) {
+  let poem = res.locals.poem;
+  return res.render('pages/poem', {
+    username: req.user ? req.user.username : null,
+    poem: poem
+  });
+});
+
+router.get('/search', isLoggedIn, queries.searchPoems, function (req, res, next) {
+  let poems = res.locals.poems;
   return res.render('pages/search', {
-    username: req.user ? req.user.username : null
+    username: req.user ? req.user.username : null,
+    poems: poems
   });
 });
 
-router.get('/settings', isLoggedIn, function(req, res, next) {
+router.get('/settings', isLoggedIn, function (req, res, next) {
   return res.render('pages/settings', {
     username: req.user ? req.user.username : null
   });
 });
 
-router.get('/encode', isLoggedIn, function(req, res, next) {
+router.get('/encode/:id', isLoggedIn, queries.getPoem, function (req, res, next) {
+  let poem = res.locals.poem;
   return res.render('pages/encode', {
-    username: req.user ? req.user.username : null
+    username: req.user ? req.user.username : null,
+    poem: poem
   });
 });
 
-router.get('/profile/:username', isLoggedIn, queries.profileInfo, function (req, res, next) {
-  console.log(res.locals.profileInfo)
+router.get('/profile/:username', isLoggedIn, queries.profileInfo, queries.getPoemsByUser, queries.getEncodingsByUser, function (req, res, next) {
   let profileInfo = res.locals.profileInfo;
+  let poems = res.locals.poems;
+  let encodings = res.locals.encodings;
   return res.render('pages/profile', {
     username: req.user ? req.user.username : null,
-    profileInfo: res.locals.profileInfo
+    profile: res.locals.profileInfo,
+    poems: poems,
+    encodings: encodings
   });
 });
 
@@ -122,7 +144,7 @@ router.get('/logout', function (req, res, next) {
 router.post('/login', function (req, res, next) {
   passport.authenticate('local-login', {failureFlash: true}, function (err, user, info) {
     if (err) { return next(err); }
-    if (!user) { return res.redirect('/'); }
+    if (!user) { return res.redirect('/login'); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       return res.redirect('/profile/' + user.username);
@@ -133,7 +155,7 @@ router.post('/login', function (req, res, next) {
 router.post('/signup', function (req, res, next) {
   passport.authenticate('local-signup', {failureFlash: true}, function (err, user, info) {
     if (err) { return next(err); }
-    if (!user) { return res.redirect('/'); }
+    if (!user) { return res.redirect('/signup'); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       return res.redirect('/profile/' + user.username);
@@ -141,17 +163,30 @@ router.post('/signup', function (req, res, next) {
   })(req, res, next);
 });
 
-router.get('/validate', function (req, res, next) {
-  let str = '<TEI xmlns="http://www.tei-c.org/ns/1.0"><yes p:id="yeah">ff<yes>fgfM</yes>gf</yes> /n <sysy>d<dd><FF text="p98">jd</FF><hhh></sysy></dd></hhh>jdjd</TEI>'.replace(/\/n/g, "");
+router.post('/submit', queries.addPoem, function (req, res, next) {
+  let poem = res.locals.poem;
+  return res.redirect('/poem/' + poem.id);
+});
 
-  xml.validate(str, function (status, message) {
-    return res.json(message);
+router.post('/submitencode', queries.addPoem, function (req, res, next) {
+  let poem = res.locals.poem;
+  return res.redirect('/encode/' + poem.id);
+});
+
+router.post('/poem/:id/encode', queries.encodePoem, function (req, res, next) {
+  return res.redirect('/poem/' + req.params.id);
+});
+
+router.post('/validate', function (req, res, next) {
+  let str = '<TEI xmlns="http://www.tei-c.org/ns/1.0"><yes p:id="yeah">ff<yes>fgfM</yes>gf</yes> /n <sysy>d<dd><FF text="p98">jd</FF><hhh></sysy></dd></hhh>jdjd</TEI>'.replace(/\/n/g, "");
+  xml.validate(req.body.original, req.body.encoded, function (status, message) {
+    return res.json({status: status, message: message});
   })
 });
 
 module.exports = router;
 
-function isLoggedIn(req, res, next) {  
+function isLoggedIn (req, res, next) {
   if (req.isAuthenticated())
       return next();
   res.redirect('/');

@@ -29,27 +29,21 @@ module.exports = function (passport) {
   },
   (req, username, password, done) => {
     process.nextTick(() => {
-      return db.query("SELECT username FROM users WHERE username = $1", [username], true)
+      return db.query("SELECT u.username FROM users u, profile p WHERE u.id = p.id AND (u.username = $1 OR p.email = $2)", [username, req.body.email], true)
         .then(user => {
           if(user) {
-            return done(null, false, req.flash('signupMessage', 'That username is already in use'));
+            return done(null, false, req.flash('signupMessage', 'That username or email is already in use'));
           }
           else {
             let salt = createSalt();
             let hashedPassword = createHash(password + salt);
-            return db.query("INSERT INTO users (username, password, salt) VALUES ($1, $2, $3)", [username, hashedPassword, salt])
-              .then(() => {
-                return db.query("SELECT id, username FROM users WHERE username = $1 AND password = $2", [username, hashedPassword], true)
-                  .then(user => {
-                    if(user) {
-                      db.query("INSERT INTO profile (id, email) VALUES ($1, $2)", [user.id, req.body.email]);
-                      return done(null, user);
-                    }
-                    else { return done(null, false, req.flash('loginMessage', 'Weird error')); }
-                  })
-                  .catch(err => {
-                    return done(err);
-                  });
+            return db.query("INSERT INTO users (username, password, salt) VALUES ($1, $2, $3) RETURNING id, username", [username, hashedPassword, salt], true)
+              .then(user => {
+                if(user) {
+                  db.query("INSERT INTO profile (id, first_name, last_name, email) VALUES ($1, $2, $3, $4)", [user.id, req.body.first_name, req.body.last_name, req.body.email]);
+                  return done(null, user);
+                }
+                else { return done(null, false, req.flash('loginMessage', 'Weird error')); }
               })
               .catch(err => {
                 return done(err);

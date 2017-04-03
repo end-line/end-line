@@ -1,15 +1,3 @@
-CREATE TABLE poems (
-  id SERIAL PRIMARY KEY NOT NULL,
-  title TEXT,
-  author TEXT,
-  body TEXT
-);
-
-CREATE TABLE encoded_poems (
-  id SERIAL PRIMARY KEY NOT NULL,
-  body TEXT
-);
-
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   username TEXT,
@@ -17,19 +5,37 @@ CREATE TABLE users (
   salt TEXT
 );
 
-CREATE TABLE full_post (
-  id SERIAL PRIMARY KEY NOT NULL,
-  poem_id INTEGER REFERENCES poems (id),
-  post_id INTEGER REFERENCES encoded_poems (id),
-  user_id INTEGER REFERENCES users (id),
-  date_posted TIMESTAMP WITHOUT TIME ZONE
-);
-
 CREATE TABLE profile (
   id INTEGER REFERENCES users (id),
   first_name TEXT,
   last_name TEXT,
   email TEXT
+);
+
+CREATE TABLE poems (
+  id SERIAL PRIMARY KEY NOT NULL,
+  title TEXT,
+  author TEXT,
+  genre TEXT,
+  body TEXT
+);
+
+CREATE TABLE uploaded_poems (
+  poem_id INTEGER REFERENCES poems (id),
+  user_id INTEGER REFERENCES users (id),
+  date_uploaded TIMESTAMP WITHOUT TIME ZONE
+);
+
+CREATE TABLE encoded_poems (
+  id SERIAL PRIMARY KEY NOT NULL,
+  body TEXT
+);
+
+CREATE TABLE full_encoding (
+  poem_id INTEGER REFERENCES poems (id),
+  encoded_id INTEGER REFERENCES encoded_poems (id),
+  user_id INTEGER REFERENCES users (id),
+  date_posted TIMESTAMP WITHOUT TIME ZONE
 );
 
 INSERT INTO users (username, password, salt) VALUES

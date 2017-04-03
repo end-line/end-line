@@ -17,17 +17,17 @@
         <div class="col-md-6 center-text">
             <h2 class="center-text">My Uploads</h2>
             <hr>
-            <a href="#"><p>My Feelings: The Poem</p></a>
-            <a href="#"><p>Cool Poem #42</p></a>
-            <a href="#"><p>The poem with that other stanza</p></a>
-            <a href="#"><p>The poem with that stanza</p></a>
+            <% poems.forEach((poem) => { %>
+              <a href="/poem/<%= poem.id %>"><p><%= poem.title %></p></a>
+            <% }) %>
         </div>
 
         <div class="col-md-6 center-text">
             <h2>My Encodings</h2>
             <hr>
-            <a href="#"><p>[20170401] Cool Poem #42</p></a>
-            <a href="#"><p>[20170402] The poem with that stanza</p></a>
+            <% encodings.forEach((encoding) => { %>
+              <a href="/poem/<%= encoding.poem_id %>/encoding/<%= encoding.encoded_id %>"><p>[<%= encoding.date_posted %>] <%= encoding.title %></p></a>
+            <% }) %>
         </div>
 	</div>
 
