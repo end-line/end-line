@@ -70,7 +70,7 @@ router.get('/compare/:poem_id/:type_1/:version_1/:type_2/:version_2', isLoggedIn
 });
 
 router.get('/poem/:id', isLoggedIn, queries.getPoem, queries.getEncodingsByPoem, function (req, res, next) {
-  // console.log(res.locals.poem.date_uploaded)
+  console.log(res.locals.poem.date_uploaded)
   console.log(new Date().getTimezoneOffset())
   return res.render('pages/poem', {
     moment: moment,

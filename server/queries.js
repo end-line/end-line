@@ -43,7 +43,7 @@ let searchPoems = (req, res, next) => {
 let addPoem = (req, res, next) => {
   let sql1 = "SELECT id FROM poems WHERE title = $1 AND author = $2;",
       sql2 = "INSERT INTO poems (title, author, genre, body) VALUES ($1, $2, $3, $4) RETURNING id;",
-      sql3 = "INSERT INTO uploaded_poems (poem_id, user_id, date_uploaded) VALUES ($1, $2, CURRENT_TIMESTAMP);";
+      sql3 = "INSERT INTO uploaded_poems (poem_id, user_id, date_uploaded) VALUES ($1, $2, CURRENT_TIMESTAMP AT TIME ZONE 'UTC');";
 
   db.query(sql1, [req.body.title, req.body.author], true)
     .then(poem => {
