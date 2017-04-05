@@ -2,7 +2,7 @@
 <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header insetname"><%= poem.title %> <span class="insetmeta1"><%= poem.author %></span> <span class="insetmeta2"><%= moment(poem.date_uploaded).utcOffset(-1*(new Date().getTimezoneOffset())).format('MMM Do, YYYY, h:mm:ss a') %></span></h1>
+                <h1 class="page-header insetname"><%= poem.title %> <span class="insetmeta1"><%= poem.author %></span> <span class="insetmeta2"><%= moment.utc(poem.date_uploaded).utcOffset(-1*(new Date().getTimezoneOffset())).format('MMM Do, YYYY, h:mm:ss a') %></span></h1>
                 <h4>
             </div>
         </div>

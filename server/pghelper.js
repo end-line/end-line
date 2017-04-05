@@ -17,6 +17,7 @@ exports.query = function (sql, values, singleItem, dontLog) {
 
   return new Promise((resolve, reject) => {
     pg.defaults.ssl = true;
+    pg.types.setTypeParser(1114, str => str);
     pg.connect(databaseURL, function (err, conn, done) {
       if (err) { return reject(err); }
       try {
