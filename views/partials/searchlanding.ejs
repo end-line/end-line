@@ -43,7 +43,7 @@
                     <h5><%= poem.author %></h5>
                  </div>
                <div class="col-xs-2">
-                   <h5><%= poem.date_uploaded %></h5>
+                   <h5><%= moment(poem.date_uploaded).format('MM/DD/YYYY') %></h5>
             </div>
         </div>
           <% }) %>

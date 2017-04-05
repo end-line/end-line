@@ -34,13 +34,22 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(session({
-    secret: 'teisecret',
-    resave: false,
-    saveUninitialized: false
+  secret: 'teisecret',
+  resave: false,
+  saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+// Handles log in and sing up form fields for rerender
+app.use(function(req,res,next) {
+  res.locals.first_name = req.flash('first_name')[0] || "";
+  res.locals.last_name = req.flash('last_name')[0] || "";
+  res.locals.email = req.flash('email')[0] || "";
+  res.locals.username = req.flash('username')[0] || "";
+  next();
+});
 
 require('./server/passport')(passport);
 

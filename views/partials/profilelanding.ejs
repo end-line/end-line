@@ -26,7 +26,7 @@
             <h2>My Encodings</h2>
             <hr>
             <% encodings.forEach((encoding) => { %>
-              <a href="/poem/<%= encoding.poem_id %>/encoding/<%= encoding.encoded_id %>"><p>[<%= encoding.date_posted %>] <%= encoding.title %></p></a>
+              <a href="/poem/<%= encoding.poem_id %>/encoding/<%= encoding.encoded_id %>"><p>[<%= moment(encoding.date_posted).format('MM/DD/YYYY') %>] <%= encoding.title %></p></a>
             <% }) %>
         </div>
 	</div>

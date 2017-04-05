@@ -2,7 +2,7 @@
 <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header insetname"><%= poem.title %> <span class="insetmeta1"><%= poem.author %></span> <span class="insetmeta2"><%= poem.date_uploaded %></span></h1>
+                <h1 class="page-header insetname"><%= poem.title %> <span class="insetmeta1"><%= poem.author %></span> <span class="insetmeta2"><%= moment(poem.date_uploaded).format('MMM Do, YYYY, h:mm:ss a') %></span></h1>
                 <h4>
             </div>
         </div>
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <div class="row">
+<!--         <div class="row">
            <div class="col-xs-4">
                <h4>Gregory Rocco</h4>
              </div>
@@ -73,14 +73,14 @@
             <div class="col-xs-2">
                <input type="radio" name="optradio2">
             </div>
-        </div>
-
-        <div class="row">
+        </div> -->
+        <% encodings.forEach((encoding) => { %>
+          <div class="row">
            <div class="col-xs-4">
-               <h4>Michael Kirby</h4>
+               <h4><%= encoding.first_name %> <%= encoding.last_name %></h4>
              </div>
            <div class="col-xs-3">
-                <h4>20170401</h4>
+                <h4><%= moment(encoding.date_posted).format('MM/DD/YYYY') %></h4>
              </div>
            <div class="col-xs-2">
                <input type="radio" name="optradio1">
@@ -88,22 +88,8 @@
             <div class="col-xs-2">
                <input type="radio" name="optradio2">
             </div>
-        </div>
-
-        <div class="row">
-           <div class="col-xs-4">
-               <h4>Brian Hamilton</h4>
-             </div>
-           <div class="col-xs-3">
-                <h4>20170401</h4>
-             </div>
-           <div class="col-xs-2">
-               <input type="radio" name="optradio1">
-            </div>
-            <div class="col-xs-2">
-               <input type="radio" name="optradio2">
-            </div>
-        </div>
+          </div>
+        <% }) %>
 
 <!-- Submit Button Row -->
 <div class="row">

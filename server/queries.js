@@ -110,6 +110,18 @@ let getEncodingsByUser = (req, res, next) => {
     .catch(next);
 };
 
+let getEncodingsByPoem = (req, res, next) => {
+  let sql1 = "SELECT f.encoded_id, f.poem_id, p.title, f.date_posted, pr.first_name, pr.last_name FROM full_encoding f, poems p, profile pr " + 
+              "WHERE f.poem_id = p.id AND f.user_id = pr.id AND f.poem_id = $1 ORDER BY f.date_posted;";
+
+  db.query(sql1, [req.params.id])
+    .then(encodings => {
+      res.locals.encodings = encodings;
+      return next();
+    })
+    .catch(next);
+};
+
 exports.profileInfo = profileInfo;
 exports.searchPoems = searchPoems;
 exports.addPoem = addPoem;
@@ -117,3 +129,4 @@ exports.encodePoem = encodePoem;
 exports.getPoem = getPoem;
 exports.getPoemsByUser = getPoemsByUser;
 exports.getEncodingsByUser = getEncodingsByUser;
+exports.getEncodingsByPoem = getEncodingsByPoem;
