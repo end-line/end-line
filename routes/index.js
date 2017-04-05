@@ -73,7 +73,7 @@ router.get('/poem/:id', isLoggedIn, queries.getPoem, queries.getEncodingsByPoem,
   return res.render('pages/poem', {
     moment: moment,
     username: req.user ? req.user.username : null,
-    poems: res.locals.poems,
+    poem: res.locals.poem,
     encodings: res.locals.encodings
   });
 });

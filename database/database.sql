@@ -23,7 +23,7 @@ CREATE TABLE poems (
 CREATE TABLE uploaded_poems (
   poem_id INTEGER REFERENCES poems (id),
   user_id INTEGER REFERENCES users (id),
-  date_uploaded TIMESTAMP WITH TIME ZONE
+  date_uploaded TIMESTAMP WITHOUT TIME ZONE
 );
 
 CREATE TABLE encoded_poems (
@@ -35,7 +35,7 @@ CREATE TABLE full_encoding (
   poem_id INTEGER REFERENCES poems (id),
   encoded_id INTEGER REFERENCES encoded_poems (id),
   user_id INTEGER REFERENCES users (id),
-  date_posted TIMESTAMP WITH TIME ZONE
+  date_posted TIMESTAMP WITHOUT TIME ZONE
 );
 
 INSERT INTO users (username, password, salt) VALUES
