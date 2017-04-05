@@ -77,7 +77,8 @@ let encodePoem = (req, res, next) => {
 };
 
 let getPoem = (req, res, next) => {
-  let sql1 = "SELECT p.id, p.title, p.author, p.genre, p.body, u.date_uploaded FROM poems p, uploaded_poems u WHERE p.id = $1 AND p.id = u.poem_id;";
+  let sql1 = "SELECT p.id, p.title, p.author, p.genre, p.body, u.date_uploaded " + 
+              "FROM poems p, uploaded_poems u WHERE p.id = $1 AND p.id = u.poem_id;";
 
   db.query(sql1, [req.params.id], true)
     .then(poem => {
@@ -111,10 +112,29 @@ let getEncodingsByUser = (req, res, next) => {
 };
 
 let getEncodingsByPoem = (req, res, next) => {
-  let sql1 = "SELECT f.encoded_id, f.poem_id, p.title, f.date_posted, pr.first_name, pr.last_name FROM full_encoding f, poems p, profile pr " + 
+  let sql1 = "SELECT f.encoded_id, f.poem_id, p.title, f.date_posted, pr.first_name, pr.last_name " + 
+              "FROM full_encoding f, poems p, profile pr " + 
               "WHERE f.poem_id = p.id AND f.user_id = pr.id AND f.poem_id = $1 ORDER BY f.date_posted;";
 
   db.query(sql1, [req.params.id])
+    .then(encodings => {
+      res.locals.encodings = encodings;
+      return next();
+    })
+    .catch(next);
+};
+
+let getEncodingsForCompare = (req, res, next) => {
+  let sql = "SELECT t1.id AS id_1, t1.body AS body_1, t2.id AS id_2, t2.body AS body_2 FROM ";
+  let sqlEncode = "(SELECT id, body FROM encoded_poems WHERE id = $";
+  let sqlPoem = "(SELECT id, body FROM poems WHERE id = $";
+
+  if(req.params.type_1 === 'poem') sql += sqlPoem + "1) AS t1, ";
+  else sql += sqlEncode + "1) AS t1, ";
+  if(req.params.type_2 === 'poem') sql += sqlPoem + "2) AS t2;";
+  else sql += sqlEncode + "2) AS t2;";
+
+  db.query(sql, [req.params.version_1, req.params.version_2], true)
     .then(encodings => {
       res.locals.encodings = encodings;
       return next();
@@ -130,3 +150,4 @@ exports.getPoem = getPoem;
 exports.getPoemsByUser = getPoemsByUser;
 exports.getEncodingsByUser = getEncodingsByUser;
 exports.getEncodingsByPoem = getEncodingsByPoem;
+exports.getEncodingsForCompare = getEncodingsForCompare;

@@ -61,9 +61,11 @@ router.get('/encodesubmission', isLoggedIn, function (req, res, next) {
   });
 });
 
-router.get('/compare', isLoggedIn, function (req, res, next) {
+router.get('/compare/:poem_id/:type_1/:version_1/:type_2/:version_2', isLoggedIn, queries.getEncodingsForCompare, function (req, res, next) {
   return res.render('pages/compare', {
-    username: req.user ? req.user.username : null
+    username: req.user ? req.user.username : null,
+    encodings: res.locals.encodings,
+    poem_id: req.params.poem_id
   });
 });
 
@@ -172,8 +174,14 @@ router.post('/poem/:id/encode', queries.encodePoem, function (req, res, next) {
   return res.redirect('/poem/' + req.params.id);
 });
 
+router.post('/compare/:poem_id', function (req, res, next) {
+  if(req.body.optRadio1 && req.body.optRadio2)
+    return res.redirect('/compare/' + req.params.poem_id + "/" + req.body.optRadio1 + "/" + req.body.optRadio2);
+  return res.redirect('/poem/' + req.params.poem_id);
+});
+
 router.post('/validate', function (req, res, next) {
-  let str = '<TEI xmlns="http://www.tei-c.org/ns/1.0"><yes p:id="yeah">ff<yes>fgfM</yes>gf</yes> /n <sysy>d<dd><FF text="p98">jd</FF><hhh></sysy></dd></hhh>jdjd</TEI>'.replace(/\/n/g, "");
+  //let str = '<TEI xmlns="http://www.tei-c.org/ns/1.0"><yes p:id="yeah">ff<yes>fgfM</yes>gf</yes> /n <sysy>d<dd><FF text="p98">jd</FF><hhh></sysy></dd></hhh>jdjd</TEI>'.replace(/\/n/g, "");
   xml.validate(req.body.original, req.body.encoded, function (status, message) {
     return res.json({status: status, message: message});
   })
@@ -183,12 +191,12 @@ module.exports = router;
 
 function isLoggedIn (req, res, next) {
   if (req.isAuthenticated())
-      return next();
+    return next();
   res.redirect('/');
 }
 
 function isNotLoggedIn (req, res, next) {
   if (!req.isAuthenticated())
-      return next();
+    return next();
   res.redirect('/');
 }

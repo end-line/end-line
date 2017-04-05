@@ -43,37 +43,23 @@
                <h4 class="tableitem">Compare 2</h4>
             </div>
           </div>
-
+<form role="form" action="/compare/<%= poem.id %>" method="POST">
 <!-- Results -->
         <div class="row">
            <div class="col-xs-4">
-               <h4>Original Author</h4>
+               <h4><%= poem.author %></h4>
              </div>
            <div class="col-xs-3">
-                <h4>Original</h4>
+                <h4><%= moment(poem.date_uploaded).format('MM/DD/YYYY') %></h4>
              </div>
            <div class="col-xs-2">
-               <input type="radio" name="optradio1">
+               <input type="radio" name="optRadio1" value="poem/<%= poem.id %>"/>
             </div>
             <div class="col-xs-2">
-               <input type="radio" name="optradio2">
+               <input type="radio" name="optRadio2" value="poem/<%= poem.id %>"/>
             </div>
         </div>
 
-<!--         <div class="row">
-           <div class="col-xs-4">
-               <h4>Gregory Rocco</h4>
-             </div>
-           <div class="col-xs-3">
-                <h4>20170401</h4>
-             </div>
-           <div class="col-xs-2">
-               <input type="radio" name="optradio1">
-            </div>
-            <div class="col-xs-2">
-               <input type="radio" name="optradio2">
-            </div>
-        </div> -->
         <% encodings.forEach((encoding) => { %>
           <div class="row">
            <div class="col-xs-4">
@@ -83,10 +69,10 @@
                 <h4><%= moment(encoding.date_posted).format('MM/DD/YYYY') %></h4>
              </div>
            <div class="col-xs-2">
-               <input type="radio" name="optradio1">
+               <input type="radio" name="optRadio1" value="encoding/<%= encoding.encoded_id %>"/>
             </div>
             <div class="col-xs-2">
-               <input type="radio" name="optradio2">
+               <input type="radio" name="optRadio2" value="encoding/<%= encoding.encoded_id %>"/>
             </div>
           </div>
         <% }) %>
@@ -94,6 +80,7 @@
 <!-- Submit Button Row -->
 <div class="row">
             <div class="col-lg-12 text-center">
-                </br><a href="#"><button type="button" class="btn btn-primary btn-lg">Compare</button></a>
+                </br><button type="submit" class="btn btn-primary btn-lg">Compare</button>
             </div>
         </div>
+      </form>
