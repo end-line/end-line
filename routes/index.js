@@ -79,7 +79,7 @@ router.get('/poem/:id', isLoggedIn, queries.getPoem, queries.getEncodingsByPoem,
 });
 
 router.get('/poem/:id/encoding/:encoded_id', isLoggedIn, queries.getPoem, queries.getEncodingsByPoem, function (req, res, next) {
-  return res.render('pages/poem', {
+  return res.render('pages/userencoding', {
     moment: moment,
     username: req.user ? req.user.username : null,
     poems: res.locals.poems,
