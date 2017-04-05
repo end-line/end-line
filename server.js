@@ -22,6 +22,7 @@ dotenv.load({
 });
 
 app.use(serveStatic(path.join(__dirname, 'public')));
+app.use("/moment", serveStatic(path.join(__dirname, 'node_modules/moment/')));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));

@@ -24,5 +24,4 @@
   $('#encodedPoem').on('keyup', function(e) {
     $("#submitValidated").prop("disabled", true);
   });
-  console.log(-1*(new Date().getTimezoneOffset()))
 })();

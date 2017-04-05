@@ -66,7 +66,7 @@ let addPoem = (req, res, next) => {
 
 let encodePoem = (req, res, next) => {
   let sql1 = "INSERT INTO encoded_poems (body) VALUES ($1) RETURNING id;",
-      sql2 = "INSERT INTO full_encoding (poem_id, encoded_id, user_id, date_posted) VALUES ($1, $2, $3, CURRENT_TIMESTAMP);";
+      sql2 = "INSERT INTO full_encoding (poem_id, encoded_id, user_id, date_posted) VALUES ($1, $2, $3, CURRENT_TIMESTAMP AT TIME ZONE 'UTC');";
 
   db.query(sql1, [req.body.encodedPoem], true)
     .then(encoding => {
