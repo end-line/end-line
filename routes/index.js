@@ -19,6 +19,18 @@ router.get('/about', function (req, res, next) {
   });
 });
 
+router.get('/404', function (req, res, next) {
+  return res.render('pages/404', {
+    username: req.user ? req.user.username : null
+  });
+});
+
+router.get('/500', function (req, res, next) {
+  return res.render('pages/500', {
+    username: req.user ? req.user.username : null
+  });
+});
+
 router.get('/faq', function (req, res, next) {
   return res.render('pages/faq', {
     username: req.user ? req.user.username : null

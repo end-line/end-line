@@ -1,86 +1,92 @@
-<!-- Page Header -->
 <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header insetname"><%= poem.title %> <span class="insetmeta1"><%= poem.author %></span> <span class="insetmeta2"><%= moment.utc(poem.date_uploaded).utcOffset(-1*(new Date().getTimezoneOffset())).format('MMM Do, YYYY, h:mm:ss a') %></span></h1>
-                <h4>
-            </div>
-        </div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header insetname">
+				<%= poem.title %> <span class="insetmeta1"><%= poem.author %></span> <span class="insetmeta2"><%= moment.utc(poem.date_uploaded).utcOffset(-1*(new Date().getTimezoneOffset())).format('MMM Do, YYYY, h:mm:ss a') %></span></h1>
+			<h4>
+		</div>
+	</div>
 
-<!-- Actual Poem Area -->
-        <div class="row">
-            <div class="col-lg-12 center">
-            <div class="Poem-Container">
-                <form>
-                <div class="form-group">
-                <label for="selectionone"></label>
-                <textarea class="form-control input-lg" id="item" type="text" rows="16"><%= poem.body %></textarea>
-                </form>
-                <h4>
-            </div>
-        </div>
-        <a href="/encode/<%= poem.id %>"><button type="button" class="btn btn-primary btn-lg">Encode Poem</button></a>
+	<div class="row">
+		<div class="col-lg-12 center">
+			<div class="Poem-Container">
+				<form>
+					<div class="form-group">
+						<label for="selectionone"></label>
+						<textarea class="form-control input-lg" id="item" type="text" rows="16" disabled><%= poem.body %></textarea>
+				</form>
+				<h4>
+					</div>
+			</div>
 
-<!-- Encoding Head -->
-<div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Encodings</h1>
-            </div>
-        </div>
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Encodings</h1>
+				</div>
+			</div>
 
-<!-- Encoding Table Head -->
-        <div class="row">
-           <div class="col-xs-4">
-               <h4 class="tableitem">Author</h4>
-             </div>
-           <div class="col-xs-3">
-                <h4 class="tableitem">Version Date</h4>
-             </div>
-           <div class="col-xs-2">
-               <h4 class="tableitem">Compare 1</h4>
-            </div>
-            <div class="col-xs-2">
-               <h4 class="tableitem">Compare 2</h4>
-            </div>
-          </div>
-<form role="form" action="/compare/<%= poem.id %>" method="POST">
-<!-- Results -->
-        <div class="row">
-           <div class="col-xs-4">
-               <h4><%= poem.author %></h4>
-             </div>
-           <div class="col-xs-3">
-                <h4><%= moment.utc(poem.date_uploaded).utcOffset(-1*(new Date().getTimezoneOffset())).format('MM/DD/YYYY') %></h4>
-             </div>
-           <div class="col-xs-2">
-               <input type="radio" name="optRadio1" value="poem/<%= poem.id %>"/>
-            </div>
-            <div class="col-xs-2">
-               <input type="radio" name="optRadio2" value="poem/<%= poem.id %>"/>
-            </div>
-        </div>
+			<div class="row">
+				<div class="col-xs-4">
+					<h4 class="tableitem">Author</h4>
+				</div>
+				<div class="col-xs-3">
+					<h4 class="tableitem">Version Date</h4>
+				</div>
+				<div class="col-xs-2">
+					<h4 class="tableitem">Compare 1</h4>
+				</div>
+				<div class="col-xs-2">
+					<h4 class="tableitem">Compare 2</h4>
+				</div>
+			</div>
+			<form role="form" action="/compare/<%= poem.id %>" method="POST">
 
-        <% encodings.forEach((encoding) => { %>
-          <div class="row">
-           <div class="col-xs-4">
-               <h4><%= encoding.first_name %> <%= encoding.last_name %></h4>
-             </div>
-           <div class="col-xs-3">
-                <h4><%= moment.utc(encoding.date_posted).utcOffset(-1*(new Date().getTimezoneOffset())).format('MM/DD/YYYY') %></h4>
-             </div>
-           <div class="col-xs-2">
-               <input type="radio" name="optRadio1" value="encoding/<%= encoding.encoded_id %>"/>
-            </div>
-            <div class="col-xs-2">
-               <input type="radio" name="optRadio2" value="encoding/<%= encoding.encoded_id %>"/>
-            </div>
-          </div>
-        <% }) %>
+				<div class="row">
+					<div class="col-xs-4">
+						<h4>
+							<%= poem.author %>
+						</h4>
+					</div>
+					<div class="col-xs-3">
+						<h4>
+							<%= moment.utc(poem.date_uploaded).utcOffset(-1*(new Date().getTimezoneOffset())).format('MM/DD/YYYY') %>
+						</h4>
+					</div>
+					<div class="col-xs-2">
+						<input type="radio" name="optRadio1" value="poem/<%= poem.id %>" />
+					</div>
+					<div class="col-xs-2">
+						<input type="radio" name="optRadio2" value="poem/<%= poem.id %>" />
+					</div>
+				</div>
 
-<!-- Submit Button Row -->
-<div class="row">
-            <div class="col-lg-12 text-center">
-                </br><button type="submit" class="btn btn-primary btn-lg">Compare</button>
-            </div>
-        </div>
-      </form>
+				<% encodings.forEach((encoding) => { %>
+					<div class="row">
+						<div class="col-xs-4">
+							<h4>
+								<%= encoding.first_name %>
+									<%= encoding.last_name %>
+							</h4>
+						</div>
+						<div class="col-xs-3">
+							<h4>
+								<%= moment.utc(encoding.date_posted).utcOffset(-1*(new Date().getTimezoneOffset())).format('MM/DD/YYYY') %>
+							</h4>
+						</div>
+						<div class="col-xs-2">
+							<input type="radio" name="optRadio1" value="encoding/<%= encoding.encoded_id %>" />
+						</div>
+						<div class="col-xs-2">
+							<input type="radio" name="optRadio2" value="encoding/<%= encoding.encoded_id %>" />
+						</div>
+					</div>
+					<% }) %>
+
+						<div class="row">
+							<div class="col-lg-12 text-center">
+								</br>
+								<a href="/encode/<%= poem.id %>"><button type="button" class="btn btn-primary btn-lg">Encode Poem</button></a>
+								<button type="submit" class="btn btn-primary btn-lg">Compare</button>
+							</div>
+						</div>
+			</form>

@@ -1,55 +1,53 @@
-<!-- Page Content --> 
 <div class="container">
 	<div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Upload a Poem
-            </br>
-            </h1>
-        </div>
-    </div>
-<form id="submit-poem" method="POST" action="/submit">
-<div class="row">
-    <div class="col-md-6">
-        <div class="col-s">
-        <label for="uploadtitle">Title</label>
-        <input class="form-control" id="uploadtitle" type="text" name="title" required autofocus>
-        </div>
-    </div>
+		<div class="col-lg-12">
+			<h1 class="page-header">Upload a Poem
+				</br>
+			</h1>
+		</div>
+	</div>
 
-    <div class="col-md-6">
-        <div class="col-s-2">
-        <label for="uploadtitle">Author</label>
-        <input class="form-control" id="uploadtitle" type="text" name="author" required>
-        </div>
-    </div>
-</div>
+	<form id="submit-poem" method="POST" action="/submit">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="col-s">
+					<label for="uploadtitle">Title</label>
+					<input class="form-control" id="uploadtitle" type="text" name="title" required autofocus>
+				</div>
+			</div>
 
-<div class="row top-buffer">
-    <div class="col-md-6">
-        <div class="col-s">
-        <label for="uploadtitle">Genre</label>
-        <input class="form-control" id="uploadtitle" type="text" name="genre">
-        </div>
-    </div>
-</div>
+			<div class="col-md-6">
+				<div class="col-s-2">
+					<label for="uploadtitle">Author</label>
+					<input class="form-control" id="uploadtitle" type="text" name="author" required>
+				</div>
+			</div>
+		</div>
 
+		<div class="row top-buffer">
+			<div class="col-md-6">
+				<div class="col-s">
+					<label for="uploadtitle">Genre</label>
+					<input class="form-control" id="uploadtitle" type="text" name="genre">
+				</div>
+			</div>
+		</div>
 
-<div class="row top-buffer">
-    <div class="col-md-6">
-        <div class="form-group">
-        <label for="inputlg">Paste Your Text Here</label>
-        <textarea class="form-control input-lg" id="inputlg" type="text" rows="16" name="lines" required></textarea>
-        </div>
-</div>
-    <div class="col-md-6 top-buffer center-text">
-        <!-- lazy bootstrap centering -->
-        </br></br></br></br>
-        <button type="submit" class="btn btn-lg btn-primary" id="submitupload">Submit</button>
-        </br>
-        <button type="submit" class="btn btn-lg btn-primary" id="submitandencode" formaction='/submitencode'>Submit and Encode</button></a>
-    </div>
-</form>
-    </div>
-
-
-
+		<div class="row top-buffer">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="inputlg">Paste Your Text Here</label>
+					<textarea class="form-control input-lg" id="inputlg" type="text" rows="16" name="lines" required></textarea>
+				</div>
+			</div>
+			<div class="col-md-6 top-buffer center-text">
+				</br>
+				</br>
+				</br>
+				</br>
+				<button type="submit" class="btn btn-lg btn-primary" id="submitupload">Submit</button>
+				</br>
+				<button type="submit" class="btn btn-lg btn-primary" id="submitandencode" formaction='/submitencode'>Submit and Encode</button></a>
+			</div>
+	</form>
+	</div>

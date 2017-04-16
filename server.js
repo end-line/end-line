@@ -58,13 +58,13 @@ app.use('/', routes);
 
 //Handle 404
 app.use(function(req, res, next) {
-  res.status(404).send('404: Not Found. You don\'t belong here.');
+  res.status(404).render('pages/404');
 });
 
 //Handle 500
 app.use(function(err, req, res, next) {
   console.log(err)
-  res.status(500).send('500: Internal Server Error');
+  res.status(500).render('pages/500');
 });
 
 app.listen(app.get('port'), function () {
