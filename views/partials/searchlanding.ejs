@@ -20,52 +20,71 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="col-xs-7">
-			<h4 class="tableitem">Title</h4>
-		</div>
-		<div class="col-xs-3">
-			<h4 class="tableitem">Author</h4>
-		</div>
-		<div class="col-xs-2">
-			<h4 class="tableitem">Date</h4>
-		</div>
-	</div>
-	<% poems.forEach((poem) => { %>
+	<% if (total !== 0) { %>
+
 		<div class="row">
 			<div class="col-xs-7">
-				<a href="/poem/<%= poem.id %>">
-					<h4>
-						<%= poem.title %>
-					</h4>
-				</a>
+				<h4 class="tableitem">Title</h4>
 			</div>
 			<div class="col-xs-3">
-				<h5>
-					<%= poem.author %>
-				</h5>
+				<h4 class="tableitem">Author</h4>
 			</div>
 			<div class="col-xs-2">
-				<h5>
-					<%= moment.utc(poem.date_uploaded).utcOffset(-1*(new Date().getTimezoneOffset())).format('MM/DD/YYYY') %>
-				</h5>
+				<h4 class="tableitem">Date</h4>
 			</div>
 		</div>
-		<% }) %>
+		<% poems.forEach((poem) => { %>
+			<div class="row">
+				<div class="col-xs-7">
+					<a href="/poem/<%= poem.id %>">
+						<h4>
+							<%= poem.title %>
+						</h4>
+					</a>
+				</div>
+				<div class="col-xs-3">
+					<h5>
+						<%= poem.author %>
+					</h5>
+				</div>
+				<div class="col-xs-2">
+					<h5>
+						<%= moment.utc(poem.date_uploaded).utcOffset(-1*(new Date().getTimezoneOffset())).format('MM/DD/YYYY') %>
+					</h5>
+				</div>
+			</div>
+			<% }) %>
 
-			<nav aria-label="searchnav">
-				<ul class="pagination">
-					<li class="page-item <%= page===pageBottom ? "disabled" : "" %>"><a class="page-link" href="/search?q=<%= encodedSearch %>&#38;page=<%= page-1 %>">Previous</a></li>
-					<% for(var i=pageBottom;i<=pageTop;i++) { %>
-						<li class="page-item <%= i===page ? "active" : "" %>">
-							<a class="page-link" href="/search?q=<%= encodedSearch %>&#38;page=<%= i %>"><%= i %>
-								<% if (i===pageBottom) { %>
-									<span class="sr-only">(current)</span>
-								<% } %>
-							</a>
-						</li>
-					<% } %>
-					<li class="page-item <%= page===pageTop ? "disabled" : "" %>"><a class="page-link" href="/search?q=<%= encodedSearch %>&#38;page=<%= page+1 %>">Next</a></li>
-				</ul>
-			</nav>
+				<nav aria-label="searchnav">
+					<ul class="pagination">
+						<% if (page !== pageBottom) { %>
+							<li class="page-item"><a class="page-link" href="/search?q=<%= encodedSearch %>&#38;page=<%= page-1 %>">Previous</a></li>
+						<% } else { %>
+							<li class="page-item disabled"><span class="page-link">Previous</span></li>
+						<% } %>
+						<% if (pageBottom !== 1) { %>
+							<li class="page-item"><a class="page-link" href="/search?q=<%= encodedSearch %>&#38;page=<%= 1 %>">1</a></li>
+						<% } %>
+						<% for(var i=pageBottom;i<=pageTop;i++) { %>
+							<li class="page-item <%= i===page ? "active" : "" %>">
+								<a class="page-link" href="/search?q=<%= encodedSearch %>&#38;page=<%= i %>"><%= i %>
+									<% if (i===pageBottom) { %>
+										<span class="sr-only">(current)</span>
+									<% } %>
+								</a>
+							</li>
+						<% } %>
+						<% if (pageTop !== totalPages) { %>
+							<li class="page-item"><a class="page-link" href="/search?q=<%= encodedSearch %>&#38;page=<%= totalPages %>"><%= totalPages %></a></li>
+						<% } %>
+						<% if (page !== pageTop) { %>
+							<li class="page-item"><a class="page-link" href="/search?q=<%= encodedSearch %>&#38;page=<%= page+1 %>">Next</a></li>
+						<% } else { %>
+							<li class="page-item disabled"><span class="page-link">Next</span></li>
+						<% } %>
+					</ul>
+				</nav>
+	<% } else { %>
+		<div>There's nothing here<div>
+	<% } %>
 </div>

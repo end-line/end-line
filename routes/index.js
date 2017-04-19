@@ -120,6 +120,7 @@ router.get('/search', isLoggedIn, queries.searchPoems, function (req, res, next)
     pageSize: pageSize,
     pageTop: pageTop,
     pageBottom: pageBottom,
+    totalPages: totalPages,
     search: search,
     encodedSearch: encodeURIComponent(search)
   });
