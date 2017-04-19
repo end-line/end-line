@@ -259,3 +259,12 @@ input[type="radio"]{
     text-align:center;
 }
 
+/* For Need Help? Get Started */
+
+.get-started
+{
+  color: #323c55;
+  font-size: 15px;
+  font-weight: bold;
+}
+
