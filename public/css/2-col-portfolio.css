@@ -268,3 +268,8 @@ input[type="radio"]{
   font-weight: bold;
 }
 
+/* login error */
+.login-center-text {
+  text-align: center;
+  color: red;
+}
