@@ -6,20 +6,25 @@
 			</h1>
 		</div>
 	</div>
+	<% if (poem_check) { %>
+		<div>
+			Did you mean <a href="/poem/<%= poem_check.id %>"><%= poem_check.title %> by <%= poem_check.author %></a>?
+		</div>
+	<% } %>
 
 	<form id="submit-poem" method="POST" action="/submit">
 		<div class="row">
 			<div class="col-md-6">
 				<div class="col-s">
 					<label for="uploadtitle">Title</label>
-					<input class="form-control" id="uploadtitle" type="text" name="title" required autofocus>
+					<input class="form-control" id="uploadtitle" type="text" name="title" value="<%= title %>" required autofocus>
 				</div>
 			</div>
 
 			<div class="col-md-6">
 				<div class="col-s-2">
 					<label for="uploadtitle">Author</label>
-					<input class="form-control" id="uploadtitle" type="text" name="author" required>
+					<input class="form-control" id="uploadtitle" type="text" name="author" value="<%= author %>" required>
 				</div>
 			</div>
 		</div>
@@ -28,7 +33,7 @@
 			<div class="col-md-6">
 				<div class="col-s">
 					<label for="uploadtitle">Genre</label>
-					<input class="form-control" id="uploadtitle" type="text" name="genre">
+					<input class="form-control" id="uploadtitle" type="text" name="genre" value="<%= genre %>">
 				</div>
 			</div>
 		</div>
@@ -37,7 +42,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="inputlg">Paste Your Text Here</label>
-					<textarea class="form-control input-lg" id="inputlg" type="text" rows="16" name="lines" required></textarea>
+					<textarea class="form-control input-lg" id="inputlg" type="text" rows="16" name="lines" required><%= lines %></textarea>
 				</div>
 			</div>
 			<div class="col-md-6 top-buffer center-text">

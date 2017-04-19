@@ -18,6 +18,8 @@ let profileInfo = (req, res, next) => {
 
 let searchPoems = (req, res, next) => {
   let search = req.query.q,
+      pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 12,
+      page = req.query.page ? parseInt(req.query.page) : 1,
       whereParts = [],
       values = [];
 
@@ -28,28 +30,45 @@ let searchPoems = (req, res, next) => {
 
   let where = whereParts.length > 0 ? (" AND " + whereParts.join(" AND ")) : "";
 
+  let countSql = "SELECT COUNT(*) from poems p, uploaded_poems u WHERE p.id = u.poem_id" + where + ";";
+
   let sql = "SELECT p.id, p.title, p.author, u.date_uploaded " +
               "FROM poems p, uploaded_poems u WHERE p.id = u.poem_id" + where +
-              " ORDER BY title;";
+              " ORDER BY title LIMIT $" + (values.length + 1) + " OFFSET $" + (values.length + 2) + ";";
 
-  db.query(sql, values)
+/*  db.query(sql, values)
     .then(poems => {
       res.locals.poems = poems;
       return next();
+    })
+    .catch(next);*/
+  db.query(countSql, values, true)
+    .then(result => {
+      let total = parseInt(result.count);
+      db.query(sql, values.concat([pageSize, ((page - 1) * pageSize)]))
+        .then(poems => {
+          res.locals.poems = {"pageSize": pageSize, "page": page, "total": total, "poems": poems};
+          return next();
+        })
+        .catch(next);
     })
     .catch(next);
 };
 
 let addPoem = (req, res, next) => {
-  let sql1 = "SELECT id FROM poems WHERE title = $1 AND author = $2;",
+  let sql1 = "SELECT id, title, author FROM poems WHERE LOWER(title) = $1 AND LOWER(author) = $2;",
       sql2 = "INSERT INTO poems (title, author, genre, body) VALUES ($1, $2, $3, $4) RETURNING id;",
       sql3 = "INSERT INTO uploaded_poems (poem_id, user_id, date_uploaded) VALUES ($1, $2, CURRENT_TIMESTAMP AT TIME ZONE 'UTC');";
 
-  db.query(sql1, [req.body.title, req.body.author], true)
+  db.query(sql1, [req.body.title.toLowerCase(), req.body.author.toLowerCase()], true)
     .then(poem => {
       if (poem) {
-        res.locals.poem = "Already exists";
-        return next();
+        req.flash('poem_check', poem);
+        req.flash('title', req.body.title);
+        req.flash('author', req.body.author);
+        req.flash('genre', req.body.genre);
+        req.flash('lines', req.body.lines);
+        return res.redirect("/upload");
       }
       else {
         db.query(sql2, [req.body.title, req.body.author, req.body.genre, req.body.lines], true)
@@ -83,6 +102,18 @@ let getPoem = (req, res, next) => {
   db.query(sql1, [req.params.id], true)
     .then(poem => {
       res.locals.poem = poem;
+      return next();
+    })
+    .catch(next);
+};
+
+let getEncoding = (req, res, next) => {
+  let sql1 = "SELECT f.poem_id, f.encoded_id, p.title, p.author, e.body, f.date_posted " + 
+              "FROM poems p, encoded_poems e, full_encoding f WHERE p.id = $1 AND e.id = $2 AND p.id = f.poem_id AND e.id = f.encoded_id;";
+
+  db.query(sql1, [req.params.poem_id, req.params.encoded_id], true)
+    .then(poemcoding => {
+      res.locals.poemcoding = poemcoding;
       return next();
     })
     .catch(next);
@@ -147,6 +178,7 @@ exports.searchPoems = searchPoems;
 exports.addPoem = addPoem;
 exports.encodePoem = encodePoem;
 exports.getPoem = getPoem;
+exports.getEncoding = getEncoding;
 exports.getPoemsByUser = getPoemsByUser;
 exports.getEncodingsByUser = getEncodingsByUser;
 exports.getEncodingsByPoem = getEncodingsByPoem;

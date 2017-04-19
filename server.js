@@ -49,6 +49,11 @@ app.use(function(req,res,next) {
   res.locals.last_name = req.flash('last_name')[0] || "";
   res.locals.email = req.flash('email')[0] || "";
   res.locals.username = req.flash('username')[0] || "";
+  res.locals.title = req.flash('title')[0] || "";
+  res.locals.author = req.flash('author')[0] || "";
+  res.locals.genre = req.flash('genre')[0] || "";
+  res.locals.lines = req.flash('lines')[0] || "";
+  res.locals.poem_check = req.flash('poem_check')[0] || "";
   next();
 });
 

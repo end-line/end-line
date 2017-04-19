@@ -63,7 +63,12 @@ router.get('/tos', function (req, res, next) {
 
 router.get('/upload', isLoggedIn, function (req, res, next) {
   return res.render('pages/upload', {
-    username: req.user ? req.user.username : null
+    username: req.user ? req.user.username : null,
+    title: res.locals.title,
+    author: res.locals.author,
+    genre: res.locals.genre,
+    lines: res.locals.lines,
+    poem_check: res.locals.poem_check
   });
 });
 
@@ -90,20 +95,34 @@ router.get('/poem/:id', isLoggedIn, queries.getPoem, queries.getEncodingsByPoem,
   });
 });
 
-router.get('/poem/:id/encoding/:encoded_id', isLoggedIn, queries.getPoem, queries.getEncodingsByPoem, function (req, res, next) {
+router.get('/poem/:poem_id/encoding/:encoded_id', isLoggedIn, queries.getEncoding, function (req, res, next) {
   return res.render('pages/userencoding', {
     moment: moment,
     username: req.user ? req.user.username : null,
-    poems: res.locals.poems,
-    encodings: res.locals.encodings
+    encoding: res.locals.poemcoding
   });
 });
 
 router.get('/search', isLoggedIn, queries.searchPoems, function (req, res, next) {
+  let search = req.query.q || "";
+  let total = res.locals.poems.total;
+  let page = res.locals.poems.page;
+  let pageSize = res.locals.poems.pageSize;
+  let totalPages = Math.ceil(total/pageSize);
+  let pageBottom = page - 3 >= 0 ? page - 3 : 1;
+  let pageTop = page + 7 > totalPages ? totalPages : page + 7;
+  console.log(search)
+  console.log(encodeURIComponent(search));
   return res.render('pages/search', {
     moment: moment,
     username: req.user ? req.user.username : null,
-    poems: res.locals.poems
+    poems: res.locals.poems.poems,
+    total: total,
+    page: page,
+    pageSize: pageSize,
+    pageTop: pageTop,
+    pageBottom: pageBottom,
+    search: encodeURIComponent(search)
   });
 });
 
@@ -196,7 +215,8 @@ router.post('/validate', function (req, res, next) {
   //let str = '<TEI xmlns="http://www.tei-c.org/ns/1.0"><yes p:id="yeah">ff<yes>fgfM</yes>gf</yes> /n <sysy>d<dd><FF text="p98">jd</FF><hhh></sysy></dd></hhh>jdjd</TEI>'.replace(/\/n/g, "");
   xml.validate(req.body.original, req.body.encoded, function (status, message) {
     return res.json({status: status, message: message});
-  })
+  });
+  //https://www.npmjs.com/package/libxml-xsd
 });
 
 module.exports = router;
