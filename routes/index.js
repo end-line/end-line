@@ -111,8 +111,6 @@ router.get('/search', isLoggedIn, queries.searchPoems, function (req, res, next)
   let totalPages = Math.ceil(total/pageSize);
   let pageBottom = page - 3 > 0 ? page - 3 : 1,
       pageTop = page + 7 > totalPages ? totalPages : page + 7;
-  console.log(search)
-  console.log(encodeURIComponent(search));
   return res.render('pages/search', {
     moment: moment,
     username: req.user ? req.user.username : null,

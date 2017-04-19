@@ -18,7 +18,7 @@ let profileInfo = (req, res, next) => {
 
 let searchPoems = (req, res, next) => {
   let search = req.query.q,
-      pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 2,
+      pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 12,
       page = req.query.page ? parseInt(req.query.page) : 1,
       whereParts = [],
       values = [];
@@ -36,12 +36,6 @@ let searchPoems = (req, res, next) => {
               "FROM poems p, uploaded_poems u WHERE p.id = u.poem_id" + where +
               " ORDER BY title LIMIT $" + (values.length + 1) + " OFFSET $" + (values.length + 2) + ";";
 
-/*  db.query(sql, values)
-    .then(poems => {
-      res.locals.poems = poems;
-      return next();
-    })
-    .catch(next);*/
   db.query(countSql, values, true)
     .then(result => {
       let total = parseInt(result.count);
