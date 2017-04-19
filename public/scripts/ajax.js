@@ -8,6 +8,7 @@
       data: {original: originalPoem, encoded: encodedPoem},
       success: function (data, textStatus, jqXHR) {
         $('#encodeMessage').text(data.message);
+        $('#alertModal').modal('toggle');
         if(data.status === true) {
           $("#submitValidated").prop("disabled", false);
         }
