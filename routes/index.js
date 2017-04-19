@@ -104,13 +104,13 @@ router.get('/poem/:poem_id/encoding/:encoded_id', isLoggedIn, queries.getEncodin
 });
 
 router.get('/search', isLoggedIn, queries.searchPoems, function (req, res, next) {
-  let search = req.query.q || "";
-  let total = res.locals.poems.total;
-  let page = res.locals.poems.page;
-  let pageSize = res.locals.poems.pageSize;
+  let search = req.query.q || "",
+      total = parseInt(res.locals.poems.total),
+      page = parseInt(res.locals.poems.page),
+      pageSize = parseInt(res.locals.poems.pageSize);
   let totalPages = Math.ceil(total/pageSize);
-  let pageBottom = page - 3 >= 0 ? page - 3 : 1;
-  let pageTop = page + 7 > totalPages ? totalPages : page + 7;
+  let pageBottom = page - 3 > 0 ? page - 3 : 1,
+      pageTop = page + 7 > totalPages ? totalPages : page + 7;
   console.log(search)
   console.log(encodeURIComponent(search));
   return res.render('pages/search', {
@@ -122,7 +122,8 @@ router.get('/search', isLoggedIn, queries.searchPoems, function (req, res, next)
     pageSize: pageSize,
     pageTop: pageTop,
     pageBottom: pageBottom,
-    search: encodeURIComponent(search)
+    search: search,
+    encodedSearch: encodeURIComponent(search)
   });
 });
 

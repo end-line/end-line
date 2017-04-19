@@ -18,7 +18,7 @@ let profileInfo = (req, res, next) => {
 
 let searchPoems = (req, res, next) => {
   let search = req.query.q,
-      pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 12,
+      pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 2,
       page = req.query.page ? parseInt(req.query.page) : 1,
       whereParts = [],
       values = [];
