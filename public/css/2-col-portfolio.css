@@ -67,6 +67,10 @@ h1, h2, h3, h4, h5 {
   margin-top:20px; 
 }
 
+.top-buffer-but { 
+  top: 100px; 
+}
+
 .button-buffer{
   position: relative;
   height: 14rem;
