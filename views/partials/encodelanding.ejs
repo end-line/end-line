@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Encode This Work <span class="get-started"><a href="#getStartedModal" data-toggle="modal" data-target="#getStartedModal">Need Help? Get Started</a></span>
+      <h1 class="page-header">Encode This Work <span class="modal-link"><a href="#getStartedModal" data-toggle="modal" data-target="#getStartedModal">Need Help? Get Started</a></span>
         </br>
       </h1>
     </div>
@@ -35,6 +35,8 @@
 
 </div>
 
+<!-- getStartedModal -->
+
 <div class="modal fade" id="getStartedModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -44,29 +46,13 @@
       </div>
       <div class="modal-body">
         <center>
-          <p class="text-left">Need some help with TEI? See below for an introduction and for a short guide to some of the most commonly used
-            tags in the TEI verse module.</p>
-          <p class="text-left">As the end/line <a href="http://www.endlineproject.org/faq">FAQs</a> explain, “TEI is the acronym for the Text
-            Encoding Initiative and is a set of guidelines and tags for encoding texts in the humanities,” and yet that explanation
-            provides only the most basic information. While TEI remains a longstanding project in the academic world (it
-            dates back to 1994), it is also a seemingly daunting prescription for marking up texts—the <a href="http://www.tei-c.org/release/doc/tei-p5-doc/en/Guidelines.pdf">PDF</a>            of the current set of guidelines runs to 1,887 pages! Thankfully, however, we can approach TEI in smaller chunks,
-            called modules. At end/line, we focus on poetry and, therefore, ask users to encode texts using the TEI <a href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/VE.html">verse module</a>.</p>
-          <p class="text-left">You can read more about this module on the TEI website, but here are some basic tags that will help you start encoding.</p>
-          <p class="text-left"><code><strong>&lt;text&gt;</strong></code> You will need to begin and end all of your encodings with this tag.
-            In TEI, this element "contains a single text of any kind, whether unitary or composite, for example a poem or
-            drama, a collection of essays, a novel, a dictionary, or a corpus sample." It is the most basic and necessary
-            tag in your work.</p>
-          <p class="text-left"><code><strong>&lt;lg&gt;</strong></code> Next, you will need to group lines into units using this tag, which denotes
-            "line group." While you may be more familiar with the term "stanza," "line group" offers something more expansive,
-            containing stanzas, refrains, paragraphs, dialog, and any other clear unit of lines included in poetry.</p>
-          <p class="text-left"><code><strong>&lt;l&gt;</strong></code> After grouping lines with <code><strong>&lt;lg&gt;</strong></code>, you
-            can start tagging the lines themselves with this tag.</p>
+          <p class="text-left">You can read more about TEI’s <a href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/VE.html">verse module</a> elsewhere, but here are some basic tags that will help you start encoding.</p>
+          <p class="text-left"><code><strong>&lt;text&gt;</strong></code> You will need to begin and end all of your encodings with this tag. In TEI, this element "contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample." It is the most basic and necessary tag in your work.</p>
+          <p class="text-left"><code><strong>&lt;lg&gt;</strong></code> Next, you will need to group lines into units using this tag, which denotes "line group." While you may be more familiar with the term "stanza," "line group" offers something more expansive, containing stanzas, refrains, paragraphs, dialog, and any other clear unit of lines included in poetry.</p>
+          <p class="text-left"><code><strong>&lt;l&gt;</strong></code> After grouping lines with <code><strong>&lt;lg&gt;</strong></code>, you can start tagging the lines themselves with this tag.</p>
           <p class="text-left"><code><strong>&lt;caesura&gt;</strong></code> You may use this tag to mark a division or a hard stop within a line.</p>
-          <p class="text-left"><code><strong>&lt;rhyme&gt;</strong></code> You may use this tag, for example, to mark the rhyming word within
-            a line.</p>
-          <p class="text-left"><code><strong>&lt;seg&gt;</strong></code> Finally, if you find the hierarchy of <code><strong>&lt;text&gt;</strong></code>,
-            <code><strong>&lt;lg&gt;</strong></code>, and <code><strong>&lt;l&gt;</strong></code> limiting, you can demarcate
-            other chunks of content using this all purpose tag. For example, you use <code><strong>&lt;seg&gt;</strong></code>            to tag individual words, syllables, or even letters.</p>
+          <p class="text-left"><code><strong>&lt;rhyme&gt;</strong></code> You may use this tag, for example, to mark the rhyming word within a line.</p>
+          <p class="text-left"><code><strong>&lt;seg&gt;</strong></code> Finally, if you find the hierarchy of <code><strong>&lt;text&gt;</strong></code>, <code><strong>&lt;lg&gt;</strong></code>, and <code><strong>&lt;l&gt;</strong></code> limiting, you can demarcate other chunks of content using this all purpose tag. For example, you use <code><strong>&lt;seg&gt;</strong></code> to tag individual words, syllables, or even letters.</p>
         </center>
         <div class="modal-footer">
           <center>

@@ -263,9 +263,9 @@ input[type="radio"]{
     text-align:center;
 }
 
-/* For Need Help? Get Started */
+/* links to learnMore, getStarted modals */
 
-.get-started
+.modal-link
 {
   color: #323c55;
   font-size: 15px;
@@ -273,6 +273,7 @@ input[type="radio"]{
 }
 
 /* login error */
+
 .login-center-text {
   text-align: center;
   color: red;

@@ -3,7 +3,7 @@
         <div class="col-lg-12">
             <h1 class="page-header">end/line
                 </br>
-                <small>a different approach to TEI</small>
+                <small>reading poetry closely with TEI</small>
             </h1>
         </div>
     </div>
@@ -11,10 +11,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <h4>Find, or upload, poetry and begin encoding. Validate your work, compare different markups of a single text, and
-                invite others to collaborate. On end/line, we encourage you to learn, practice, and refine your encoding
-                skills.
-            </h4>
+            <h4>For students and teachers of poetry, interested in engaging more deeply with texts through TEI encoding. Find a poem, encode it, validate your work, and collaborate with others. <span class="modal-link"><a href="#learnMoreModal">Intrigued? Learn more.</span></a></h4>
             <hr>
         </div>
     </div>
@@ -48,7 +45,6 @@
         </div>
         <div class="col-md-6 portfolio-item">
             <pre class="pre-scrollable"><code>
-    &lt;TEI xmlns="http://www.tei-c.org/ns/1.0"&gt;
     &lt;text&gt;
     &lt;lg type="stanza"&gt;
     &lt;l&gt;Rose,&lt;caesura/&gt; harsh rose,&lt;/l&gt;
@@ -75,7 +71,6 @@
     &lt;l enjambed="y"&gt;hardened in a leaf?&lt;/l&gt;
     &lt;/lg&gt;
     &lt;/text&gt;
-    &lt;/TEI&gt;
                 </code>
                 </pre>
             <h3 class="center-text">Encoded</h3>
@@ -95,7 +90,34 @@
 
         <div class="row">
             <div class="col-lg-12 text-center">
-                <p><img src="/images/cuny-logo.jpg" class="img-responsive center-block" width="100px" height="100px"></p>
+                <p><img src="/images/cuny-gc-logo.jpg" class="img-responsive center-block" width="100px" height="100px"></p>
             </div>
         </div>
     </div>
+
+<!-- learnMoreModal -->
+
+<div class="modal fade" id="learnMoreModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title" id="myModalLabel">Learn More</h4>
+      </div>
+      <div class="modal-body">
+        <center>
+          <p class="text-left">Why read poetry closely? What’s TEI? What am I doing here?</p>
+          <p class="text-left">Good questions. If you have little or no experience reading poetry, encoding texts with TEI, or using an application like this, see below for more information and then decide whether or not end/line works for you.</p>
+		 <p class="text-left">Close reading encourages us to slow down and engage with the often strange language of poetry. It allows us to understand how the formal and structural elements of a text convey its multiple meanings. And while “close reading” emerges out of the limited and limiting New Criticism of the post-war era, it remains an indispensable tool for developing contextual, rather than merely formal, interpretations of literary works.</p>
+		<p class="text-left">TEI stands for the Text Encoding Initiative: a set of guidelines for humanities scholars interested in encoding works in <a href="https://www.w3.org/XML/">XML</a>. While TEI remains a longstanding project in the academic world (it dates back to 1994), it also presents a daunting prescription for marking up texts—the <a href="http://www.tei-c.org/release/doc/tei-p5-doc/en/Guidelines.pdf">PDF</a> of the current set of guidelines runs to 1,887 pages! Thankfully, however, we can approach TEI in smaller chunks, called modules. Because end/line encourages users to encode poetry, it only uses TEI’s <a href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/VE.html">verse module</a> and, therefore, offers users a more manageable experience.</p>
+		<p class="text-left">Encoding, like close reading, ultimately remains a deliberative act. By attending to the hierarchies and semantics of a text, encoders perform their own close readings, and end/line facilitates this. We hope that you use the site to better understand the mechanics of poetry by learning the mechanics of TEI.</p>
+        </center>
+        <div class="modal-footer">
+          <center>
+            <button type="button" class="btn btn-default" data-dismiss="modal"><a href="http://www.endlineproject.org/signup">Sign-Up</a></button>
+          </center>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
