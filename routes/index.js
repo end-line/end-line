@@ -167,6 +167,12 @@ router.get('/forgotpassword', isNotLoggedIn, queries.getPoem, function (req, res
   });
 });
 
+router.get('/emailvalid', isNotLoggedIn, queries.getPoem, function (req, res, next) {
+  return res.render('pages/emailvalid', {
+    username: req.user ? req.user.username : null
+  });
+});
+
 router.get('/login', isNotLoggedIn, function (req, res, next) {
   return res.render('pages/login', {
     message: req.flash('loginMessage'),
