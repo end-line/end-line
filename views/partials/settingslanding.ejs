@@ -10,14 +10,23 @@
 	<div class="row">
 		<div class="col-md-6">
 			<h3>Change Your Password</h3>
-			<form role="form" action="/changepassword" method="POST">
+      <% if (message) { %>
+        <div class="login-center-text">
+          <%= message %>
+        </div>
+      <% } %>
+			<form role="form" action="/password/change" method="POST">
 				<div class="col-s">
 					<label for="oldpassword">Old Password</label>
-					<input class="form-control" id="oldpassword" type="password">
+					<input class="form-control" id="oldpassword" type="password" name="passwordOld" required>
 				</div>
+        <div class="col-s">
+          <label for="oldpasswordconfirm">Confirm Old Password</label>
+          <input class="form-control" id="oldpasswordconfirm" type="password" name="passwordOldConfirm" required>
+        </div>
 				<div class="col-s">
 					<label for="newpassword">New Password</label>
-					<input class="form-control" id="newpassword" type="password">
+					<input class="form-control" id="newpassword" type="password" name="password" required>
 				</div>
 				</br>
 				<div class="col-s">

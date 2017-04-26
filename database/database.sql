@@ -2,7 +2,8 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   username TEXT,
   password TEXT,
-  salt TEXT
+  salt TEXT,
+  valid BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE profile (

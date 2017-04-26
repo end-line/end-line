@@ -1,8 +1,13 @@
 "use strict";
 
-let db = require('./pghelper');
+let crypto = require('crypto'),
+    db = require('./pghelper');
 
 let escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+
+let createSalt = () => crypto.randomBytes(32).toString('hex'); //creates salt for password
+
+let createHash = (string) => crypto.createHash('sha256').update(string).digest('hex'); //hashes password
 
 let profileInfo = (req, res, next) => {
   let username = req.params.username,
@@ -167,6 +172,44 @@ let getEncodingsForCompare = (req, res, next) => {
     .catch(next);
 };
 
+let changePassword = (req, res, next) => { //changes password for a user
+
+  let salt = createSalt(); //creates salt
+  let hashedPassword = createHash(req.body.password + salt); //creates a hashed password with the inputted password and salt
+
+  let sql1 = "SELECT salt FROM users WHERE id = $1;";
+  let sql2 = "SELECT id FROM users WHERE password = $1 AND id = $2;";
+  let sql3 = "UPDATE users SET password = $1, salt = $2 WHERE id = $3";
+
+  if(req.body.passwordOld !== req.body.passwordOldConfirm) {
+    req.flash('message', 'Passwords do not match');
+    return next();
+  }
+  else {
+    db.query(sql1, [req.user.id], true)
+      .then(user => {
+        let hashedPasswordOld = createHash(req.body.passwordOld + user.salt);
+        db.query(sql2, [hashedPasswordOld, req.user.id], true)
+          .then(result => {
+            if(result) {
+              db.query(sql3, [hashedPassword, salt, req.user.id])
+                .then(() => {
+                  req.flash('message', 'Password change successful');
+                  return next();
+                })
+                .catch(next);
+            }
+            else {
+              req.flash('message', 'Not current password');
+              return next();
+            }
+          })
+          .catch(next);
+      })
+      .catch(next);
+  }
+};
+
 exports.profileInfo = profileInfo;
 exports.searchPoems = searchPoems;
 exports.addPoem = addPoem;
@@ -177,3 +220,4 @@ exports.getPoemsByUser = getPoemsByUser;
 exports.getEncodingsByUser = getEncodingsByUser;
 exports.getEncodingsByPoem = getEncodingsByPoem;
 exports.getEncodingsForCompare = getEncodingsForCompare;
+exports.changePassword = changePassword;

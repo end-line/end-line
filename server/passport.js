@@ -15,7 +15,7 @@ module.exports = function (passport) {
   });
 
   passport.deserializeUser((id, done) => {
-    db.query("SELECT id, username FROM users WHERE id = $1", [id], true)
+    db.query("SELECT id, username, valid FROM users WHERE id = $1", [id], true)
       .then(user => {
         if(user) { done(null, user); }
         else { done(new Error("User with the id ${id} does not exist")); }

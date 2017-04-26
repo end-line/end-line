@@ -54,6 +54,7 @@ app.use(function(req,res,next) {
   res.locals.genre = req.flash('genre')[0] || "";
   res.locals.lines = req.flash('lines')[0] || "";
   res.locals.poem_check = req.flash('poem_check')[0] || "";
+  res.locals.message = req.flash('message')[0] || "";
   next();
 });
 

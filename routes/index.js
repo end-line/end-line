@@ -128,7 +128,8 @@ router.get('/search', isLoggedIn, queries.searchPoems, function (req, res, next)
 
 router.get('/settings', isLoggedIn, function (req, res, next) {
   return res.render('pages/settings', {
-    username: req.user ? req.user.username : null
+    username: req.user ? req.user.username : null,
+    message: res.locals.message
   });
 });
 
@@ -143,6 +144,7 @@ router.get('/profile/:username', isLoggedIn, queries.profileInfo, queries.getPoe
   return res.render('pages/profile', {
     moment: moment,
     username: req.user ? req.user.username : null,
+    message: res.locals.message,
     profile: res.locals.profileInfo,
     poems: res.locals.poems,
     encodings: res.locals.encodings
@@ -219,11 +221,18 @@ router.post('/validate', function (req, res, next) {
   //https://www.npmjs.com/package/libxml-xsd
 });
 
+router.post('/password/change', queries.changePassword, function (req, res, next) {
+  return res.redirect('/settings');
+});
+
 module.exports = router;
 
 function isLoggedIn (req, res, next) {
-  if (req.isAuthenticated())
-    return next();
+  if (req.isAuthenticated()) {
+    if (req.user.valid) {
+      return next();
+    }
+  }
   res.redirect('/');
 }
 
