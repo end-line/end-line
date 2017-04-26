@@ -196,7 +196,7 @@ router.post('/signup', function (req, res, next) {
     if (err) { return next(err); }
     if (!user) { return res.redirect('/signup'); }
     email.validateAccount(req.body.email, user.id, user.secret);
-    return res.redirect('/profile/' + user.username);
+    return res.redirect('/');
 /*    req.logIn(user, function(err) {
       if (err) { return next(err); }
       email.validateAccount(req.body.email, user.id, user.secret);
