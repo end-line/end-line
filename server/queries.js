@@ -1,7 +1,8 @@
 "use strict";
 
 let crypto = require('crypto'),
-    db = require('./pghelper');
+    db = require('./pghelper'),
+    randomstring = require("randomstring");
 
 let escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 
@@ -210,6 +211,34 @@ let changePassword = (req, res, next) => { //changes password for a user
   }
 };
 
+let resetPassword = (req, res, next) => { //changes password for a user
+
+  let newPassword = randomstring.generate(7); //creates random password string
+  let salt = createSalt(); //creates salt
+  let hashedPassword = createHash(newPassword + salt); //creates a hashed password with the new password and salt
+
+  let sql1 = "SELECT u.id FROM users u, profile p WHERE u.id = p.id AND u.username = $1 AND p.email = $2;";
+  let sql2 = "UPDATE users SET password = $1, salt = $2 WHERE id = $3";
+
+  db.query(sql1, [req.body.username, req.body.email], true)
+    .then(user => {
+      if(user) {
+        db.query(sql2, [hashedPassword, salt, user.id])
+          .then(() => {
+            req.flash('message', 'Password reset');
+            res.locals.password = newPassword;
+            return next();
+          })
+          .catch(next);
+      }
+      else {
+        req.flash('message', 'Username and email do not match records');
+        return next();
+      }
+    })
+    .catch(next);
+};
+
 exports.profileInfo = profileInfo;
 exports.searchPoems = searchPoems;
 exports.addPoem = addPoem;
@@ -221,3 +250,4 @@ exports.getEncodingsByUser = getEncodingsByUser;
 exports.getEncodingsByPoem = getEncodingsByPoem;
 exports.getEncodingsForCompare = getEncodingsForCompare;
 exports.changePassword = changePassword;
+exports.resetPassword = resetPassword;

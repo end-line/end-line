@@ -67,7 +67,7 @@
 
 <!-- beforeYouBeginModal -->
 
-<div class="modal show" id="beforeYouBeginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="beforeYouBeginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -80,10 +80,16 @@
         </center>
         <div class="modal-footer">
           <center>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
+            <button id="uploadModal" type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
           </center>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+     $('#beforeYouBeginModal').modal('show');
+  });
+</script>

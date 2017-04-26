@@ -225,6 +225,14 @@ router.post('/password/change', queries.changePassword, function (req, res, next
   return res.redirect('/settings');
 });
 
+router.post('/password/reset', queries.resetPassword, function (req, res, next) {
+  return res.redirect('/settings');
+});
+
+router.post('/account/verification/:user_id/:user_secret', function (req, res, next) {
+  return res.redirect('/settings');
+});
+
 module.exports = router;
 
 function isLoggedIn (req, res, next) {
