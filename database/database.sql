@@ -3,7 +3,8 @@ CREATE TABLE users (
   username TEXT,
   password TEXT,
   salt TEXT,
-  valid BOOLEAN NOT NULL DEFAULT TRUE
+  valid BOOLEAN NOT NULL DEFAULT TRUE,
+  secret TEXT
 );
 
 CREATE TABLE profile (

@@ -5,6 +5,7 @@ let express = require('express'),
     moment = require('moment'),
     queries = require('../server/queries'),
     xml = require('../server/xml'),
+    email = require('../server/email'),
     router = express.Router();
 
 router.get('/', function (req, res, next) {
@@ -167,11 +168,11 @@ router.get('/forgotpassword', isNotLoggedIn, queries.getPoem, function (req, res
   });
 });
 
-router.get('/emailvalid', isNotLoggedIn, queries.getPoem, function (req, res, next) {
+/*router.get('/emailvalid', isLoggedIn, function (req, res, next) {
   return res.render('pages/emailvalid', {
     username: req.user ? req.user.username : null
   });
-});
+});*/
 
 router.get('/login', isNotLoggedIn, function (req, res, next) {
   return res.render('pages/login', {
@@ -202,6 +203,7 @@ router.post('/signup', function (req, res, next) {
     if (!user) { return res.redirect('/signup'); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
+      email.validateAccount(req.body.email, user.id, user.secret);
       return res.redirect('/profile/' + user.username);
     });
   })(req, res, next);
@@ -241,8 +243,15 @@ router.post('/password/reset', queries.resetPassword, function (req, res, next) 
   return res.redirect('/settings');
 });
 
-router.post('/account/verification/:user_id/:user_secret', function (req, res, next) {
-  return res.redirect('/settings');
+router.get('/verification/:user_id/:user_secret', queries.validateAccount, function (req, res, next) {
+  return res.render('pages/emailvalid', {
+    username: req.user ? req.user.username : null
+  });
+});
+
+router.get('/testingemail', function (req, res, next) {  
+  // email.validateAccount("hmltnbrn@gmail.com", "It worked");
+  return res.redirect('/');
 });
 
 module.exports = router;

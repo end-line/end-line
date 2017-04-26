@@ -6,6 +6,8 @@ let LocalStrategy = require('passport-local').Strategy,
 
 let createSalt = () => crypto.randomBytes(32).toString('hex'); //creates salt for password
 
+let createSecret = () => crypto.randomBytes(16).toString('hex'); //creates secret for account validation
+
 let createHash = (string) => crypto.createHash('sha256').update(string).digest('hex'); //hashes password
 
 module.exports = function (passport) {
@@ -45,7 +47,8 @@ module.exports = function (passport) {
             else {
               let salt = createSalt();
               let hashedPassword = createHash(password + salt);
-              return db.query("INSERT INTO users (username, password, salt) VALUES ($1, $2, $3) RETURNING id, username", [username, hashedPassword, salt], true)
+              let secret = createSecret();
+              return db.query("INSERT INTO users (username, password, salt, secret) VALUES ($1, $2, $3, $4) RETURNING id, username, secret", [username, hashedPassword, salt, secret], true)
                 .then(user => {
                   if(user) {
                     db.query("INSERT INTO profile (id, first_name, last_name, email) VALUES ($1, $2, $3, $4)", [user.id, req.body.first_name, req.body.last_name, req.body.email]);

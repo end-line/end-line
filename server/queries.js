@@ -173,6 +173,21 @@ let getEncodingsForCompare = (req, res, next) => {
     .catch(next);
 };
 
+let validateAccount = (req, res, next) => {
+  let sql = "UPDATE users SET valid = TRUE WHERE id = $1 AND secret = $2 RETURNING id;";
+
+  db.query(sql, [req.params.user_id, req.params.user_secret], true)
+    .then((user) => {
+      if(user) {
+        return next();
+      }
+      else {
+        res.redirect('/');
+      }
+    })
+    .catch(next);
+};
+
 let changePassword = (req, res, next) => { //changes password for a user
 
   let salt = createSalt(); //creates salt
@@ -249,5 +264,6 @@ exports.getPoemsByUser = getPoemsByUser;
 exports.getEncodingsByUser = getEncodingsByUser;
 exports.getEncodingsByPoem = getEncodingsByPoem;
 exports.getEncodingsForCompare = getEncodingsForCompare;
+exports.validateAccount = validateAccount;
 exports.changePassword = changePassword;
 exports.resetPassword = resetPassword;
