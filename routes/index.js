@@ -162,9 +162,11 @@ router.get('/signup', isNotLoggedIn, function (req, res, next) {
   });
 });
 
-router.get('/passwordreset', isNotLoggedIn, queries.getPoem, function (req, res, next) {
+router.get('/resetpassword', isNotLoggedIn, function (req, res, next) {
   return res.render('pages/forgotpassword', {
-    username: req.user ? req.user.username : null
+    message: res.locals.message,
+    email: res.locals.email,
+    username: res.locals.username
   });
 });
 
@@ -195,13 +197,10 @@ router.post('/signup', function (req, res, next) {
   passport.authenticate('local-signup', {failureFlash: true}, function (err, user, info) {
     if (err) { return next(err); }
     if (!user) { return res.redirect('/signup'); }
-    email.validateAccount(req.body.email, user.id, user.secret);
-    return res.redirect('/');
-/*    req.logIn(user, function(err) {
+    email.verifyAccount(req.body.email, user.id, user.secret, function (err, status) {
       if (err) { return next(err); }
-      email.validateAccount(req.body.email, user.id, user.secret);
-      return res.redirect('/profile/' + user.username);
-    });*/
+      return res.render('pages/thankyou');
+    });
   })(req, res, next);
 });
 
@@ -236,13 +235,16 @@ router.post('/password/change', queries.changePassword, function (req, res, next
 });
 
 router.post('/password/reset', queries.resetPassword, function (req, res, next) {
-  return res.redirect('/settings');
+  email.resetPassword(req.body.email, res.locals.password, function (err, status) {
+    if (err) { return next(err); }
+    return res.render('pages/resetconfirm', {
+      username: req.user ? req.user.username : null
+    });
+  });
 });
 
-router.get('/verification/:user_id/:user_secret', isNotLoggedIn, queries.validateAccount, function (req, res, next) {
-  return res.render('pages/emailvalid', {
-    username: req.user ? req.user.username : null
-  });
+router.get('/verification/:user_id/:user_secret', queries.validateAccount, function (req, res, next) {
+  return res.render('pages/emailvalid');
 });
 
 module.exports = router;
@@ -252,6 +254,7 @@ function isLoggedIn (req, res, next) {
     if (req.user.valid) {
       return next();
     }
+    return res.render('pages/validationincomplete');
   }
   res.redirect('/');
 }

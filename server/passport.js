@@ -48,7 +48,7 @@ module.exports = function (passport) {
               let salt = createSalt();
               let hashedPassword = createHash(password + salt);
               let secret = createSecret();
-              return db.query("INSERT INTO users (username, password, salt, secret) VALUES ($1, $2, $3, $4) RETURNING id, username, secret", [username, hashedPassword, salt, secret], true)
+              return db.query("INSERT INTO users (username, password, salt, secret) VALUES ($1, $2, $3, $4) RETURNING id, username, valid, secret", [username, hashedPassword, salt, secret], true)
                 .then(user => {
                   if(user) {
                     db.query("INSERT INTO profile (id, first_name, last_name, email) VALUES ($1, $2, $3, $4)", [user.id, req.body.first_name, req.body.last_name, req.body.email]);
@@ -75,9 +75,12 @@ module.exports = function (passport) {
   },
   (req, username, password, done) => {
     req.flash('username', username);
-    return db.query("SELECT salt FROM users WHERE username = $1", [username], true)
+    return db.query("SELECT salt, valid FROM users WHERE username = $1", [username], true)
       .then(user => {
-        if(user) {
+        if(user && user.valid === false) {
+          return done(null, false, req.flash('loginMessage', 'Account not verified'));
+        }
+        else if(user && user.valid === true) {
           return db.query("SELECT id, username FROM users WHERE username = $1 AND password = $2", [username, createHash(password + user.salt)], true)
             .then(user => {
               if(user) { return done(null, user); }
