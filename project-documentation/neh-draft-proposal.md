@@ -85,20 +85,25 @@ Kate Singer, whose work informs this project, has agreed to serve on the advisor
 ## Biographies
 
 Project Lead
+
 At the CUNY Graduate Center, Tom Lewek is a MALS student whose work focuses on the intersections of the digital humanities and twentieth- and twenty-first-century poetry and poetics. He proposed end/line, a web application for encoding and comparing encodings of poetry with TEI XML, in January 2017 and currently serves as its project lead. This role entails establishing, refining, and communicating the project’s humanistic importance and working with the community management and development teams to deliver it. Outside of the Graduate Center, he is the head of online production at the Modern Language Association where he coordinates the content management and web development of mla.org, the Literary Research Guide, various MLA publications on Humanities Commons, and other digital products and properties. He holds a BA from Hamilton College in English literature.
 
 Community Managers 
+
 Iuri Moscardi, born in Italy, is now a PhD student in Comparative Literature (Italian specialization) at CUNY Graduate Center: his research is focused on contemporary Italian literature and Digital Humanities. He is a member of the end/line development team, where he serve as Community Manager in maintaining contacts with the wider TEI community.
 
 Michael Kirby is a MALS student at The Graduate Center, CUNY, specializing in Digital Humanities. His main interest is contemporary poetry and poetics, and work, both creative and journalistic, can be found in Spikes Arts Quarterly	and Best American Experimental Writing 2016. He is a member of the end/line development team, where he serves as the one of two Community Managers, overseeing both the twitter page and the project blog.
 
 Back-end Developer
+
 Brian Hamilton is a MALS student at the CUNY Graduate Center, studying digital humanities and data visualization. He has a BS in information technology and web science from Rensselaer Polytechnic Institute, with a concentration in civil engineering. Currently, he works as a web developer and builds full-stack web applications in his spare time. For end/line, Brian is working as the back-end developer. He is responsible for building and maintaining the database, handling the routing of the site, and creating the TEI XML validation scripts.
 
 Front-end Developer
+
 Gregory Rocco is currently a graduate student at The Graduate Center (CUNY) studying digital humanities through the MALS program. He currently holds a special honors BA from Hunter College in English with a sub-concentration in environmental studies. His main interest is in exploring the potential of modernist texts through technology. Gregory is an IT specialist, and is currently an associate producer for a children's media company.
 
 Advisory Board 
+
 Kate Singer is an Associate Professor of English at Mount Holyoke College. She has written articles on Percy Shelley, Maria Jane Jewsbury, Mary Robinson, Letitia Landon, and Charlotte Smith that have appeared in Studies in Romanticism, European Romantic Review, Literature Compass, Romantic Circles Praxis, and Essays in Romanticism. The Editor of the Pedagogies section of the Romantic Circles website, including the online journal Pedagogy Commons, she has published on digital pedagogy in JiTP with another essay forthcoming on Letitia Landon in Pedagogy. She edited, along with Nanora Sweet, a special issue of Women’s Writing on Felicia Hemans and is currently finishing a book entitled, Romantic Vacancy: Affect, Gender, and Radical Speculation.
 
 ## Budget
