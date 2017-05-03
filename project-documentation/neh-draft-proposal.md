@@ -76,7 +76,7 @@ This project will allow users to upload a poetic text of their choosing, encode 
 
 For example, the American Verse Project developed by the University of Michigan Text Initiative and the University of Michigan Press is an archive of American poetry published before 1920: the texts have been coded in SGML with TEI, and users can search by single or associated words and by title and author, though they cannot upload their own texts. Similarly, the British Women Romantic Poets 1789-1832, developed by the University of California, Davis, is "an online scholarly archive consisting of E-text editions" of British female poets "written (not necessarily published) between 1789 and 1832". Texts are selected by an Editorial Advisory Board consisting of scholars, scanned and converted to ASCII format using an OCR software and, finally, imported into a SGML editor; users can browse the texts. Despite the availability of the texts, this is a closed project because scholars chose and encoded the texts. The terms used to define some of these projects clearly define their modes of interaction with users: the project that "makes high-resolution images of Dickinson’s surviving manuscripts available in open access, and provides readers with a website through which they can view images of manuscripts" is the Emily Dickinsonarchive , while the place where it is possible to study "the literary history of popular British and American poetry" is the Poetess archive. The same separation between scholarly producers and interested audiences can be found also in projects regarding non-English texts like the Princeton Charrette Project, which explores the tradition of the medieval French text Le Chevalier de la Charrette by Chretien de Troyes; or Dante Search by Università di Pisa, aimed to provide a catalogue of Dante's words in his Latin and vernacular works. 
 
-Kate Singer, whose work informs this project, has agreed to serve on the advisory board of this project. 
+Kate Singer, whose work informs this project, has agreed to serve as an advisor to this project. 
 
 ### History and Duration of the Project
 
@@ -84,25 +84,25 @@ Kate Singer, whose work informs this project, has agreed to serve on the advisor
 
 ## Biographies
 
-Project Lead
+**Project Lead**
 
 At the CUNY Graduate Center, Tom Lewek is a MALS student whose work focuses on the intersections of the digital humanities and twentieth- and twenty-first-century poetry and poetics. He proposed end/line, a web application for encoding and comparing encodings of poetry with TEI XML, in January 2017 and currently serves as its project lead. This role entails establishing, refining, and communicating the project’s humanistic importance and working with the community management and development teams to deliver it. Outside of the Graduate Center, he is the head of online production at the Modern Language Association where he coordinates the content management and web development of mla.org, the Literary Research Guide, various MLA publications on Humanities Commons, and other digital products and properties. He holds a BA from Hamilton College in English literature.
 
-Community Managers 
+**Community Managers**
 
 Iuri Moscardi, born in Italy, is now a PhD student in Comparative Literature (Italian specialization) at CUNY Graduate Center: his research is focused on contemporary Italian literature and Digital Humanities. He is a member of the end/line development team, where he serve as Community Manager in maintaining contacts with the wider TEI community.
 
 Michael Kirby is a MALS student at The Graduate Center, CUNY, specializing in Digital Humanities. His main interest is contemporary poetry and poetics, and work, both creative and journalistic, can be found in Spikes Arts Quarterly	and Best American Experimental Writing 2016. He is a member of the end/line development team, where he serves as the one of two Community Managers, overseeing both the twitter page and the project blog.
 
-Back-end Developer
+**Back-end Developer**
 
 Brian Hamilton is a MALS student at the CUNY Graduate Center, studying digital humanities and data visualization. He has a BS in information technology and web science from Rensselaer Polytechnic Institute, with a concentration in civil engineering. Currently, he works as a web developer and builds full-stack web applications in his spare time. For end/line, Brian is working as the back-end developer. He is responsible for building and maintaining the database, handling the routing of the site, and creating the TEI XML validation scripts.
 
-Front-end Developer
+**Front-end Developer**
 
 Gregory Rocco is currently a graduate student at The Graduate Center (CUNY) studying digital humanities through the MALS program. He currently holds a special honors BA from Hunter College in English with a sub-concentration in environmental studies. His main interest is in exploring the potential of modernist texts through technology. Gregory is an IT specialist, and is currently an associate producer for a children's media company.
 
-Advisory Board 
+**Advisor** 
 
 Kate Singer is an Associate Professor of English at Mount Holyoke College. She has written articles on Percy Shelley, Maria Jane Jewsbury, Mary Robinson, Letitia Landon, and Charlotte Smith that have appeared in Studies in Romanticism, European Romantic Review, Literature Compass, Romantic Circles Praxis, and Essays in Romanticism. The Editor of the Pedagogies section of the Romantic Circles website, including the online journal Pedagogy Commons, she has published on digital pedagogy in JiTP with another essay forthcoming on Letitia Landon in Pedagogy. She edited, along with Nanora Sweet, a special issue of Women’s Writing on Felicia Hemans and is currently finishing a book entitled, Romantic Vacancy: Affect, Gender, and Radical Speculation.
 
@@ -112,7 +112,7 @@ Kate Singer is an Associate Professor of English at Mount Holyoke College. She h
 
 ## Data Management Plan
 
-Types and Collection
+**Types and Collection**
 
 The project (end/line) is a web application that solicits plain text poetry and TEI XML encodings of that poetry from users. They will enter this information through submission forms on endlineproject.org, a website that we will build using a Bootstrap framework and will be hosted on Heroku. Users of end/line will also be able to search for poems and encodings, invite others to encode a poem, and compare any two encodings of the same poem through a front-end display that highlights their differences. They must create accounts—with email addresses, first/last names, and usernames—in order to submit either plain text poetry or TEI XML encodings. The code for this website will be openly available on GitHub and released under an MIT license.
 
@@ -120,7 +120,7 @@ In addition to the data associated with the website, this project will also main
 
 We expect that this project will be of interest to teachers, scholars, and students of the digital humanities and literature.
 
-Storage and Protection
+**Storage and Protection**
 
 We will manage all of this plain text, TEI XML, and user information data through the following SQL tables in a Postgres database:
 
@@ -154,7 +154,7 @@ name
 
 While neither the plain text poetry submissions nor the TEI XML encodings constitute sensitive data, the data contained in the Users table above do. We will, therefore, hash and encrypt this data using a salt.
 
-Sustainability and Documentation
+**Sustainability and Documentation**
 
 The use of common and standard technologies—plain text, TEI XML, a JavaScript framework like Bootstrap, and SQL—articulate this project’s emphasis on sustainability. Ultimately, however, the CUNY Graduate Center will sustain end/line for one year before reassessing its commitment. At the moment, the Graduate Center has purchased the domain name for this project and may purchase additional Heroku hosting and/or Postgres database storage capabilities.
 
