@@ -38,6 +38,12 @@ router.get('/faq', function (req, res, next) {
   });
 });
 
+router.get('/howitworks', function (req, res, next) {
+  return res.render('pages/howitworks', {
+    username: req.user ? req.user.username : null
+  });
+});
+
 router.get('/news', function (req, res, next) {
   return res.render('pages/news', {
     username: req.user ? req.user.username : null
