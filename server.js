@@ -13,6 +13,7 @@ let express = require('express'),
     routes = require('./routes/index'),
     flash = require('connect-flash'),
     logger = require('morgan'),
+    sslRedirect = require('heroku-ssl-redirect'),
     app = express();
 
 app.set('port', process.env.PORT || 8080); //sets port
@@ -26,6 +27,8 @@ app.use("/moment", serveStatic(path.join(__dirname, 'node_modules/moment/')));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+app.use(sslRedirect());
 
 app.use(logger('dev'));
 app.use(compression());
