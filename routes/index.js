@@ -6,8 +6,8 @@ let express = require('express'),
     queries = require('../server/queries'),
     xml = require('../server/xml'),
     email = require('../server/email'),
+    xsd = require('libxml-xsd'),
     router = express.Router();
-var xsd = require('libxml-xsd');
 
 router.get('/', function (req, res, next) {
   return res.render('pages/index', {
@@ -230,12 +230,10 @@ router.post('/compare/:poem_id', function (req, res, next) {
 });
 
 router.post('/validate', function (req, res, next) {
-  //let str = '<TEI xmlns="http://www.tei-c.org/ns/1.0"><yes p:id="yeah">ff<yes>fgfM</yes>gf</yes> /n <sysy>d<dd><FF text="p98">jd</FF><hhh></sysy></dd></hhh>jdjd</TEI>'.replace(/\/n/g, "");
-/*  xml.validate(req.body.original, req.body.encoded, function (status, message) {
+  xml.validate(req.body.original, req.body.encoded, function (status, message) {
     return res.json({status: status, message: message});
-  });*/
-  //https://www.npmjs.com/package/libxml-xsd
-  xsd.parseFile('./tei-xsd/tei_lite.xsd', function(err, schema) {
+  });
+/*  xsd.parseFile('./tei-xsd/tei_lite.xsd', function(err, schema) {
     if(err) {
       console.log(err);
       return res.json({status: false, message: "Technical Error"});
@@ -253,9 +251,11 @@ router.post('/validate', function (req, res, next) {
           console.log("The validation error -- " + validationErrors);
           return res.json({status: true, message: "Valid TEI XML"});
         }
+        console.log("The validation error -- " + validationErrors);
+        return res.json({status: false, message: validationErrors[0].message});
       }
     });  
-  });
+  });*/
 });
 
 router.post('/password/change', queries.changePassword, function (req, res, next) {
