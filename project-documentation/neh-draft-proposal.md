@@ -178,8 +178,6 @@ Professor Debbie DH teaches “Digital Humanities 101” at a large state univer
 
 “About.” *TAPAS Project.* [http://www.tapasproject.org/about](http://www.tapasproject.org/about).
 
-Howe, Susan. *That This*. New Directions, 2010.
-
 Rybak, Chuck. “Poetry.” *Digital Pedagogy in the Humanities: Concepts, Models, and Experiments*, edited by Rebecca Frost Davis, Matthew K. Gold, Katherine D. Harris, and Jentery Sayers, Modern Language Association, 2016, [https://digitalpedagogy.mla.hcommons.org/keywords/poetry/](https://digitalpedagogy.mla.hcommons.org/keywords/poetry/).
 
 Schreibman, Susan. “Digital Scholarly Editing.” *Literary Studies in the Digital Age*, edited by Kenneth M. Price and Ray Siemens, Modern Language Association, 2013, [https://dlsanthology.mla.hcommons.org/digital-scholarly-editing/](https://dlsanthology.mla.hcommons.org/digital-scholarly-editing/).
