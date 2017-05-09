@@ -38,9 +38,9 @@ Lewek, Tom, Graduate Student, Liberal Studies, Graduate Center, City University 
 
 ### Advisory Board
 
-Singer, Kate, PhD, Associate Professor, Department of English, Mount Holyoke College.
+Forthcoming, but we plan to ask our current external advisor, listed below, to join.
 
-[more tk]
+Singer, Kate, PhD, Associate Professor, Department of English, Mount Holyoke College.
 
 ## Abstract
 
@@ -76,7 +76,7 @@ This project will allow users to upload a poetic text of their choosing, encode 
 
 For example, the American Verse Project developed by the University of Michigan Text Initiative and the University of Michigan Press is an archive of American poetry published before 1920: the texts have been coded in SGML with TEI, and users can search by single or associated words and by title and author, though they cannot upload their own texts. Similarly, the British Women Romantic Poets 1789-1832, developed by the University of California, Davis, is "an online scholarly archive consisting of E-text editions" of British female poets "written (not necessarily published) between 1789 and 1832". Texts are selected by an Editorial Advisory Board consisting of scholars, scanned and converted to ASCII format using an OCR software and, finally, imported into a SGML editor; users can browse the texts. Despite the availability of the texts, this is a closed project because scholars chose and encoded the texts. The terms used to define some of these projects clearly define their modes of interaction with users: the project that "makes high-resolution images of Dickinson’s surviving manuscripts available in open access, and provides readers with a website through which they can view images of manuscripts" is the Emily Dickinsonarchive , while the place where it is possible to study "the literary history of popular British and American poetry" is the Poetess archive. The same separation between scholarly producers and interested audiences can be found also in projects regarding non-English texts like the Princeton Charrette Project, which explores the tradition of the medieval French text Le Chevalier de la Charrette by Chretien de Troyes; or Dante Search by Università di Pisa, aimed to provide a catalogue of Dante's words in his Latin and vernacular works. 
 
-Kate Singer, whose work informs this project, has agreed to serve as an advisor to this project. 
+Kate Singer, whose work informs this project, has served as an external advisor thus far. 
 
 ### History and Duration of the Project
 
