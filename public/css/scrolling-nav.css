@@ -14,7 +14,7 @@ html {
     height: 100%;
 }
 
-@media(min-width:767px) {
+@media(min-width:768px) {
     .navbar {
         padding: 0px 0;
         -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
@@ -34,32 +34,40 @@ html {
     text-align: center;
 }
 
-.signup-section {
-    height: 100%;
-    padding-top: 150px;
-    text-align: center;
-}
-
 .search-section {
     height: 100%;
-    padding-top: 150px;
+    padding-top: 50px;
     text-align: center;
 }
 
 .upload-section {
     height: 100%;
-    padding-top: 150px;
+    padding-top: 50px;
     text-align: center;
 }
 
 .encode-section {
     height: 100%;
-    padding-top: 150px;
+    padding-top: 50px;
     text-align: center;
 }
 
 .vsc-section {
     height: 100%;
-    padding-top: 150px;
+    padding-top: 50px;
     text-align: center;
 }
+
+.blank-section-f {
+    height: 30%;
+    padding-top: 50px;
+    text-align: center;
+}
+
+.blank-section-e {
+    height: 30%;
+    padding-top: 100px;
+    text-align: center;
+}
+
+
