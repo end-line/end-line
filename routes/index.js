@@ -6,7 +6,7 @@ let express = require('express'),
     queries = require('../server/queries'),
     xml = require('../server/xml'),
     email = require('../server/email'),
-    xsd = require('libxml-xsd'),
+    fs = require('fs'),
     router = express.Router();
 
 router.get('/', function (req, res, next) {
@@ -233,29 +233,6 @@ router.post('/validate', function (req, res, next) {
   xml.validate(req.body.original, req.body.encoded, function (status, message) {
     return res.json({status: status, message: message});
   });
-/*  xsd.parseFile('./tei-xsd/tei_lite.xsd', function(err, schema) {
-    if(err) {
-      console.log(err);
-      return res.json({status: false, message: "Technical Error"});
-    }
-    schema.validate(req.body.encoded, function(err, validationErrors) {
-      // err contains any technical error 
-      // validationError is an array, null if the validation is ok 
-      if(err) {
-        console.log("The tech error -- " + err);
-        console.log("The validation error -- " + validationErrors);
-        return res.json({status: false, message: err.message});
-      }
-      else {
-        if(!validationErrors) {
-          console.log("The validation error -- " + validationErrors);
-          return res.json({status: true, message: "Valid TEI XML"});
-        }
-        console.log("The validation error -- " + validationErrors);
-        return res.json({status: false, message: validationErrors[0].message});
-      }
-    });  
-  });*/
 });
 
 router.post('/password/change', queries.changePassword, function (req, res, next) {
@@ -274,26 +251,6 @@ router.post('/password/reset', queries.resetPassword, function (req, res, next) 
 router.get('/verification/:user_id/:user_secret', queries.validateAccount, function (req, res, next) {
   return res.render('pages/emailvalid');
 });
-
-/*router.get('/test', function (req, res, next) {
-  // var documentString = '<TEI xmlns="http://www.tei-c.org/ns/1.0"><teiHeader></teiHeader><text>texting</text></TEI>';
-  var documentString = '<TEI xmlns="http://www.tei-c.org/ns/1.0"><teiHeaders><fileDesc><titleStmt><title>Review: an electronic transcription</title></titleStmt><publicationStmt><p>Published as an example for the Introduction module of TBE.</p></publicationStmt><sourceDesc><p>No source: born digital.</p></sourceDesc></fileDesc></teiHeader><text><body><head>Review</head><p><title>Die Leiden des jungen Werther</title><note place="foot">by <name>Goethe</name></note>is an<emph>exceptionally</emph>good example of a book full of <term>Weltschmerz</term>.</p></body></text></TEI>';
-  xsd.parseFile('./routes/tei_lite.xsd', function(err, schema){
-    if(err) {
-      console.log(err)
-    }
-    schema.validate(documentString, function(err, validationErrors){
-      // err contains any technical error 
-      // validationError is an array, null if the validation is ok 
-      if(err) {
-        console.log("The tech error -- " + err);
-        return res.json(err);
-      }
-      console.log("The validation error -- " + validationErrors);
-      return res.json(validationErrors);
-    });  
-  });
-});*/
 
 module.exports = router;
 

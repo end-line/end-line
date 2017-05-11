@@ -1,6 +1,6 @@
 {
   "name": "end-line",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "engines": {
     "node": "6.9.5"
   },
@@ -29,7 +29,6 @@
     "express": "^4.14.1",
     "express-session": "^1.15.1",
     "heroku-ssl-redirect": "0.0.3",
-    "libxml-xsd": "^0.5.2",
     "moment": "^2.18.1",
     "morgan": "^1.8.1",
     "nodemailer": "^4.0.1",

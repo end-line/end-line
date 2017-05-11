@@ -16,7 +16,7 @@ exports.validate = function (orig, xml, cb) {
           }
           startTag += xml[j];
         }
-        if (!tagPattern.test(startTag)) { return cb(false, "Failed to match TEI pattern for " + startTag); }
+        if (!tagPattern.test(startTag)) { return cb(false, "Failed to match XML pattern for " + startTag); }
         let longForm = startTag.indexOf(" ");
         let endTag = longForm > -1 ? "</" + startTag.substring(1, longForm) + ">" : startTag.replace("<","</");
         if(startTag[startTag.length-2] !== '/') {
@@ -30,7 +30,7 @@ exports.validate = function (orig, xml, cb) {
         }
       }
     }
-    return cb(true, "Valid TEI XML");
+    return cb(true, "Valid XML");
   }
   return cb(false, "Encoding is smaller than original poem")
 }
