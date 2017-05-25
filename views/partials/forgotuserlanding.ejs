@@ -7,7 +7,7 @@
   <div class="row">
     <div class="Absolute-Center is-Responsive">
       <div id="absolute-name-container">
-        <h4 class="center-text">Forgot Password</h4>
+        <h4 class="center-text">Forgot Username</h4>
       </div>
       <% if (message) { %>
         <div class="login-center-text">
@@ -16,11 +16,7 @@
       <% } %>
 
       <div class="col-sm-12 col-md-10 col-md-offset-1">
-        <form role="form" action="/password/reset" method="POST">
-          <div class="form-group input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input type="username" class="form-control" placeholder="username" name="username" value="<%= username %>" required/>
-          </div>
+        <form role="form" action="" method="POST">
           <div class="form-group input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
             <input type="Email" class="form-control" placeholder="email" name="email" value="<%= email %>" required/>
@@ -31,7 +27,6 @@
       </div>
       </form>
       <div class="form-group text-center">
-        <p><a href="/">Forgot Username</a></p>
         <a href="/login">Back</a>
       </div>
       </form>
