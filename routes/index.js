@@ -177,6 +177,13 @@ router.get('/resetpassword', isNotLoggedIn, function (req, res, next) {
   });
 });
 
+router.get('/forgotusername', isNotLoggedIn, function (req, res, next) {
+  return res.render('pages/forgotusername', {
+    message: res.locals.message,
+    email: res.locals.email
+  });
+});
+
 router.get('/login', isNotLoggedIn, function (req, res, next) {
   return res.render('pages/login', {
     message: req.flash('loginMessage'),
@@ -243,6 +250,15 @@ router.post('/password/reset', queries.resetPassword, function (req, res, next) 
   email.resetPassword(req.body.email, res.locals.password, function (err, status) {
     if (err) { return next(err); }
     return res.render('pages/resetconfirm', {
+      username: req.user ? req.user.username : null
+    });
+  });
+});
+
+router.post('/username/forgot', queries.findUsername, function (req, res, next) {
+  email.findUsername(req.body.email, res.locals.username, function (err, status) {
+    if (err) { return next(err); }
+    return res.render('pages/forgotusernameconfirm', {
       username: req.user ? req.user.username : null
     });
   });

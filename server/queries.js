@@ -256,6 +256,26 @@ let resetPassword = (req, res, next) => { //changes password for a user
     .catch(next);
 };
 
+let findUsername = (req, res, next) => { //find username by email
+
+  let sql1 = "SELECT u.username FROM users u, profile p WHERE u.id = p.id AND p.email = $1;";
+
+  req.flash('email', req.body.email);
+
+  db.query(sql1, [req.body.email], true)
+    .then(user => {
+      if(user) {
+        res.locals.username = user.username;
+        return next();
+      }
+      else {
+        req.flash('message', 'Email does not match records');
+        return res.redirect('/forgotusername');
+      }
+    })
+    .catch(next);
+};
+
 exports.profileInfo = profileInfo;
 exports.searchPoems = searchPoems;
 exports.addPoem = addPoem;
@@ -269,3 +289,4 @@ exports.getEncodingsForCompare = getEncodingsForCompare;
 exports.validateAccount = validateAccount;
 exports.changePassword = changePassword;
 exports.resetPassword = resetPassword;
+exports.findUsername = findUsername;
